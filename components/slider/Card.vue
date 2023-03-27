@@ -7,7 +7,7 @@
       isCurrent: isCurrent,
     }"
     class="card"
-    :style="{ transform: transformString, backgroundColor: card.color }"
+    :style="{ transform: transformString, background: card.color }"
   >
     <div class="w-full h-full p-8 flex flex-col gap-y-4">
       <h3 class="text-xl">{{ card.title }}</h3>
@@ -84,14 +84,14 @@ export default {
       },
 
       onmove: (event) => {
+        // console.log('moving')
+
         const { interactMaxRotation, interactXThreshold } = this.$options.static
         const x = this.interactPosition.x + event.dx
-        const y = this.interactPosition.y + event.dy
+        let y = this.interactPosition.y + event.dy
 
-        // if (y > 50) y = 50
-        // else if (y < -50) y = -50
-
-        // console.log(y)
+        if (y > 50) y = 50
+        else if (y < -50) y = -50
 
         let rotation = interactMaxRotation * (x / interactXThreshold)
 

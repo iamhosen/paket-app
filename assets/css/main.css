@@ -41,6 +41,7 @@ body {
     border: #464646 1px solid;
     font-family: 'shabnam';
     direction: rtl;
+    overflow-y: hidden;
 }
 
 .en-font {
