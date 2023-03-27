@@ -3,13 +3,13 @@
     <img
       src="../assets/logo.svg"
       alt="پاکت"
-      class="logo mt-[200px] mb-[50px]"
+      class="logo mt-[100px] mb-[50px]"
     />
     <div class="w-full px-6">
       <nuxt />
     </div>
     <p
-      class="creator-tag text-xs tracking-widest font-semibold mt-16 text-white opacity-30"
+      class="creator-tag text-xs tracking-widest font-medium mt-16 text-white opacity-30"
     >
       Packet by Hossein Amirhosseini
     </p>
