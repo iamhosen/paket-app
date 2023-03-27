@@ -12,7 +12,7 @@
     <div class="w-full h-full p-8 flex flex-col gap-y-4">
       <h3 class="text-xl">{{ card.title }}</h3>
       <span
-        class="font-xero ltr-number text-2xl text-center tracking-[0.15em]"
+        class="font-xero ltr-number text-[1.4em] text-center tracking-wider"
         >{{ card.cardNumber }}</span
       >
       <span class="flex flex-col">
@@ -86,10 +86,10 @@ export default {
       onmove: (event) => {
         const { interactMaxRotation, interactXThreshold } = this.$options.static
         const x = this.interactPosition.x + event.dx
-        let y = this.interactPosition.y + event.dy
+        const y = this.interactPosition.y + event.dy
 
-        if (y > 50) y = 50
-        else if (y < -50) y = -50
+        // if (y > 50) y = 50
+        // else if (y < -50) y = -50
 
         // console.log(y)
 
