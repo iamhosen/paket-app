@@ -66,7 +66,7 @@
       </nuxt-link>
       <nuxt-link
         to="/transaction"
-        class="nav-item inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+        class="nav-item-t inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
       >
         <svg
           width="24"
@@ -114,6 +114,21 @@
 
 <style lang="scss">
 .nav-item.nuxt-link-exact-active {
+  svg path {
+    fill: var(--primary-color);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    border-radius: 50%;
+    height: 5px;
+    width: 5px;
+    background-color: var(--primary-color);
+  }
+}
+.nav-item-t.nuxt-link-exact-active {
   svg path {
     stroke: var(--primary-color);
   }
