@@ -9,15 +9,9 @@
       <nuxt />
     </div>
     <p
-      class="creator-tag text-xs tracking-widest font-medium mt-16 text-white opacity-30"
+      class="en-font text-xs tracking-widest font-medium mt-16 text-white opacity-30"
     >
       Packet by Hossein Amirhosseini
     </p>
   </div>
 </template>
-
-<style scoped>
-.creator-tag {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-</style>

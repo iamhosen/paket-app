@@ -21,6 +21,11 @@
     font-weight: 700;
 }
 
+@font-face {
+    font-family: xero;
+    src: url('../fonts/code.xero.woff2');
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -36,4 +41,8 @@ body {
     border: #464646 1px solid;
     font-family: 'shabnam';
     direction: rtl;
+}
+
+.en-font {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
