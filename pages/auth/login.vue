@@ -24,7 +24,7 @@
         type="button"
         class="w-full py-3.5 bg-primary-paket rounded-xl text-center"
       >
-        ورود به حساب
+        <nuxt-link to="/"> ورود به حساب </nuxt-link>
       </button>
     </form>
 
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .paket-form {
   &__input {
     &:-webkit-autofill,

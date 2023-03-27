@@ -1,12 +1,14 @@
 <template>
   <div>
     <Nuxt />
-    <ol>
-      <li><nuxt-link to="/">Home</nuxt-link></li>
-      <li><nuxt-link to="/transaction">transactions</nuxt-link></li>
-      <li><nuxt-link to="/transaction/new">new trans</nuxt-link></li>
-      <li><nuxt-link to="/analysis">analysis</nuxt-link></li>
-      <li><nuxt-link to="/profile">profile</nuxt-link></li>
-    </ol>
+    <bottom-navigation></bottom-navigation>
   </div>
 </template>
+
+
+<script>
+import BottomNavigation from '../components/ui/BottomNavigation.vue'
+export default {
+  components: { BottomNavigation },
+}
+</script>
