@@ -3,9 +3,22 @@
 @tailwind utilities;
 
 :root {
-    --primary-color: #1e3a8a;
+    --primary-color: #EB5340;
     --background-color: #171717;
     --box-color: #1F1F1F;
+}
+
+
+@font-face {
+    font-family: shabnam;
+    src: url('../fonts/Shabnam-WOL.woff');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: shabnam;
+    src: url('../fonts/Shabnam-Bold-WOL.woff');
+    font-weight: 700;
 }
 
 * {
@@ -21,4 +34,6 @@ body {
     background-color: var(--background-color);
     color: #ffffff;
     border: #464646 1px solid;
+    font-family: 'shabnam';
+    direction: rtl;
 }
