@@ -57,8 +57,11 @@ export default {
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus,
     &:-webkit-autofill:active {
-      -webkit-box-shadow: 0 0 0 30px #1c1c1e inset !important;
       -webkit-text-fill-color: white !important;
+      background-clip: content-box !important;
+      -webkit-box-shadow: 0 0 0 30px #1c1c1e inset !important;
+      box-shadow: 0 0 0px 1000px #1c1c1e inset !important;
+      background-color: #1c1c1e !important;
     }
   }
 }
