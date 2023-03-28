@@ -57,7 +57,6 @@ export default {
           color: '#F3B23E',
         },
       ],
-      holder: null,
     }
   },
 

@@ -8,6 +8,7 @@
     }"
     class="card"
     :style="{ transform: transformString, background: card.color }"
+    @click="onClick"
   >
     <div class="w-full h-full p-8 flex flex-col gap-y-4">
       <h3 class="text-xl">{{ card.title }}</h3>
@@ -80,6 +81,7 @@ export default {
 
     this.$interact(element).draggable({
       onstart: () => {
+        // console.log('start')
         this.isInteractAnimating = false
       },
 
@@ -103,6 +105,8 @@ export default {
       },
 
       onend: () => {
+        // console.log('end')
+
         const { x, y } = this.interactPosition
         const { interactXThreshold, interactYThreshold } = this.$options.static
         this.isInteractAnimating = true
@@ -176,6 +180,38 @@ export default {
 
     resetCardPosition() {
       this.interactSetPosition({ x: 0, y: 0, rotation: 0 })
+    },
+
+    onClick(event) {
+      const {
+        interactOutOfSightXCoordinate,
+        interactOutOfSightYCoordinate,
+        interactMaxRotation,
+      } = this.$options.static
+
+      this.interactUnsetElement()
+
+      const rect = this.$refs.interactElement.getBoundingClientRect()
+      const posX = event.clientX - rect.left
+      const center = rect.width / 2
+
+      if (posX > center) {
+        // console.log('Clicked on the right side of the element')
+        this.interactSetPosition({
+          x: interactOutOfSightXCoordinate,
+          rotation: interactMaxRotation,
+        })
+        this.$emit(ACCEPT_CARD)
+      } else {
+        this.interactSetPosition({
+          x: -interactOutOfSightXCoordinate,
+          rotation: -interactMaxRotation,
+        })
+        this.$emit(REJECT_CARD)
+        // console.log('Clicked on the left side of the element')
+      }
+
+      this.hideCard()
     },
   },
 }
@@ -273,7 +309,7 @@ $fs-card-title: 1.125em;
   }
 
   display: flex;
-  max-height: 230px;
+  max-height: 200px;
   margin: auto;
 
   font-size: $fs-h2;
