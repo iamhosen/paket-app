@@ -344,10 +344,6 @@ $fs-card-title: 1.125em;
   }
 }
 
-.ltr-number {
-  direction: ltr;
-}
-
 @for $i from 1 through $cardsTotal {
   $index: $i - 1;
   $translation: $cardsPositionOffset * $index;

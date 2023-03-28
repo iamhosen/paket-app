@@ -3,7 +3,7 @@
     <div class="w-full flex justify-center items-center h-[40px] mb-6">
       <img src="../assets/logo.svg" alt="پاکت" class="h-[100%]" />
     </div>
-    <div class="w-full h-64 mb-8">
+    <div class="w-full h-64 mb-6">
       <card-stack
         :cards="visibleCards"
         @cardAccepted="handleCardAccepted"
@@ -11,15 +11,17 @@
         @hideCard="removeCardFromDeck"
       ></card-stack>
     </div>
-    <p>home page</p>
+    <home-tabs></home-tabs>
   </div>
 </template>
 
 <script>
 import CardStack from '@/components/slider/CardStack.vue'
+import HomeTabs from '@/components/HomeTabs.vue'
+
 export default {
   name: 'HomePage',
-  components: { CardStack },
+  components: { CardStack, HomeTabs },
 
   data() {
     return {
