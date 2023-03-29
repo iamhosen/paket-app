@@ -1,9 +1,12 @@
 <template>
   <div>
+    <div
+      class="absolute mt-[-1em] t-0 w-full max-w-[500px] h-40 bg-[#282828] -z-10"
+    ></div>
     <div class="w-full flex justify-center items-center h-[40px] mb-6">
       <img src="../assets/logo.svg" alt="پاکت" class="h-[100%]" />
     </div>
-    <div class="w-full h-64 mb-6">
+    <div class="w-full h-64 mb-2">
       <card-stack
         :cards="visibleCards"
         @cardAccepted="handleCardAccepted"
@@ -12,16 +15,18 @@
       ></card-stack>
     </div>
     <home-tabs></home-tabs>
+    <home-analysis></home-analysis>
   </div>
 </template>
 
 <script>
 import CardStack from '@/components/slider/CardStack.vue'
 import HomeTabs from '@/components/HomeTabs.vue'
+import HomeAnalysis from '../components/HomeAnalysis.vue'
 
 export default {
   name: 'HomePage',
-  components: { CardStack, HomeTabs },
+  components: { CardStack, HomeTabs, HomeAnalysis },
 
   data() {
     return {

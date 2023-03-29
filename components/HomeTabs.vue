@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-wrapper mx-4 bg-box-paket p-4 rounded-2xl">
+  <div class="tab-wrapper mx-4 bg-box-paket p-4 rounded-2xl mb-8">
     <div class="tab-head mb-5">
       <ul
         class="flex flex-row rounded-lg justify-between bg-[#767680] p-1 bg-opacity-25 gap-1 cursor-pointer"

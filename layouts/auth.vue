@@ -8,9 +8,7 @@
     <div class="w-full px-6">
       <nuxt />
     </div>
-    <p
-      class="en-font text-xs tracking-widest font-medium mt-16 text-white opacity-30"
-    >
+    <p class="text-xs tracking-widest font-medium mt-16 text-white opacity-30">
       Packet by Hossein Amirhosseini
     </p>
   </div>
