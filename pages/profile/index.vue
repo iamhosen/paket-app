@@ -59,7 +59,9 @@
     </div>
 
     <div class="mx-4 mb-5">
-      <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">تنظیمات</h3>
+      <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">
+        اطلاعات کاربری
+      </h3>
       <div class="bg-bg-input-paket rounded-[14px]">
         <nuxt-link
           to=""

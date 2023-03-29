@@ -48,3 +48,7 @@ body {
 .ltr-number {
     direction: ltr;
 }
+
+a {
+    -webkit-tap-highlight-color: transparent;
+}

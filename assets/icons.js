@@ -50,3 +50,18 @@ export const backup = `<svg width="19" height="19" viewBox="0 0 19 19" fill="non
 </defs>
 </svg>
 `
+export const back = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15 18.5L9 12.5L15 6.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+export const plus = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 5.5V19.5" stroke="#EB5340" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M5 12.5H19" stroke="#EB5340" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+
+export const sub = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.79688 10.0402L4.79688 15.0402L9.79688 20.0402" stroke="#616162" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.7969 4.04016V11.0402C20.7969 12.101 20.3754 13.1184 19.6253 13.8686C18.8752 14.6187 17.8577 15.0402 16.7969 15.0402H4.79688" stroke="#616162" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
