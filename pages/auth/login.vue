@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .paket-form {
   &__input {
     &:-webkit-autofill,

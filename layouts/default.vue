@@ -1,6 +1,6 @@
 <template>
   <div class="pt-4">
-    <Nuxt class="mb-24" />
+    <nuxt class="mb-24" />
     <bottom-navigation></bottom-navigation>
   </div>
 </template>
@@ -12,6 +12,3 @@ export default {
   components: { BottomNavigation },
 }
 </script>
-
-<style lang="scss" scoped>
-</style>
