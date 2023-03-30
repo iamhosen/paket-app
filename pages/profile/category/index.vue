@@ -32,7 +32,7 @@
     <!-- items -->
     <div class="bg-bg-input-paket rounded-[14px] mx-4">
       <nuxt-link
-        to=""
+        to="/profile/category/id"
         class="flex items-center mx-4 py-4 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
       >
         <div

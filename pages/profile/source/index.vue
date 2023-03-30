@@ -8,7 +8,8 @@
 
     <!-- cards -->
     <div class="mx-4 flex flex-col gap-4">
-      <div
+      <nuxt-link
+        to="/profile/source/id"
         class="w-full h-full p-8 flex flex-col gap-y-4 rounded-xl"
         v-for="card in cards"
         :key="card.id"
@@ -24,7 +25,7 @@
             {{ toPersianNumberFormat(card.total) }}
           </p>
         </span>
-      </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

@@ -38,7 +38,7 @@ body {
     margin-right: auto;
     background-color: var(--background-color);
     color: #ffffff;
-    border: #464646 1px solid;
+    /* border: #464646 1px solid; */
     font-family: 'shabnam', 'Segoe UI';
     direction: rtl;
     overflow-x: hidden;
