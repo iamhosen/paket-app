@@ -12,10 +12,9 @@
   >
     <div class="w-full h-full p-8 flex flex-col gap-y-4">
       <h3 class="text-xl">{{ card.title }}</h3>
-      <span
-        class="font-xero ltr-number text-[1.4em] text-center tracking-wider"
-        >{{ card.cardNumber }}</span
-      >
+      <span class="font-xero ltr text-[1.4em] text-center tracking-wider">{{
+        card.cardNumber
+      }}</span>
       <span class="flex flex-col">
         <p class="font-normal opacity-40">موجودی</p>
         <p class="font-bold text-2xl tracking-widest">

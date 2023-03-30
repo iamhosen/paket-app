@@ -25,6 +25,7 @@ export const tag = `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" 
 </svg>
 `
 export const edit = `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.26501 15.4417H16.2138" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.7394 2.70229C13.0466 2.39514 13.4632 2.22258 13.8975 2.22258C14.1126 2.22258 14.3256 2.26494 14.5243 2.34725C14.723 2.42956 14.9036 2.5502 15.0557 2.70229C15.2077 2.85438 15.3284 3.03493 15.4107 3.23364C15.493 3.43236 15.5354 3.64533 15.5354 3.86042C15.5354 4.0755 15.493 4.28848 15.4107 4.48719C15.3284 4.6859 15.2077 4.86645 15.0557 5.01854L5.40462 14.6696L2.31628 15.4417L3.08837 12.3533L12.7394 2.70229Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+export const editOrange = `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M9.26501 15.4417H16.2138" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.7394 2.70229C13.0466 2.39514 13.4632 2.22258 13.8975 2.22258C14.1126 2.22258 14.3256 2.26494 14.5243 2.34725C14.723 2.42956 14.9036 2.5502 15.0557 2.70229C15.2077 2.85438 15.3284 3.03493 15.4107 3.23364C15.493 3.43236 15.5354 3.64533 15.5354 3.86042C15.5354 4.0755 15.493 4.28848 15.4107 4.48719C15.3284 4.6859 15.2077 4.86645 15.0557 5.01854L5.40462 14.6696L2.31628 15.4417L3.08837 12.3533L12.7394 2.70229Z" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`
 export const lock = `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M14.6696 8.49292H3.86045C3.00763 8.49292 2.31628 9.18426 2.31628 10.0371V15.4417C2.31628 16.2945 3.00763 16.9858 3.86045 16.9858H14.6696C15.5224 16.9858 16.2138 16.2945 16.2138 15.4417V10.0371C16.2138 9.18426 15.5224 8.49292 14.6696 8.49292Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M5.40454 8.49292V5.40458C5.40454 4.38074 5.81126 3.39883 6.53523 2.67486C7.2592 1.95089 8.24111 1.54417 9.26496 1.54417C10.2888 1.54417 11.2707 1.95089 11.9947 2.67486C12.7187 3.39883 13.1254 4.38074 13.1254 5.40458V8.49292" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -63,5 +64,19 @@ export const plus = `<svg width="24" height="25" viewBox="0 0 24 25" fill="none"
 export const sub = `<svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M9.79688 10.0402L4.79688 15.0402L9.79688 20.0402" stroke="#616162" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M20.7969 4.04016V11.0402C20.7969 12.101 20.3754 13.1184 19.6253 13.8686C18.8752 14.6187 17.8577 15.0402 16.7969 15.0402H4.79688" stroke="#616162" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+
+export const arrow = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.85333 1.95085L9.85333 17.2108" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.4833 9.58085L9.85334 17.2108L2.22334 9.58085" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`
+
+export const trash = `<svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2.78619 5.36743H4.33036H16.6837" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15.1396 5.36751V16.1767C15.1396 16.5862 14.9769 16.979 14.6873 17.2686C14.3977 17.5582 14.0049 17.7208 13.5954 17.7208H5.87455C5.46501 17.7208 5.07225 17.5582 4.78266 17.2686C4.49307 16.979 4.33038 16.5862 4.33038 16.1767V5.36751M6.64663 5.36751V3.82334C6.64663 3.4138 6.80932 3.02104 7.09891 2.73145C7.3885 2.44186 7.78126 2.27917 8.1908 2.27917H11.2791C11.6887 2.27917 12.0814 2.44186 12.371 2.73145C12.6606 3.02104 12.8233 3.4138 12.8233 3.82334V5.36751" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M8.1908 9.22791V13.8604" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M11.2791 9.22791V13.8604" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `

@@ -24,6 +24,7 @@
 import CardStack from '@/components/slider/CardStack.vue'
 import HomeTabs from '@/components/HomeTabs.vue'
 import HomeAnalysis from '../components/HomeAnalysis.vue'
+
 import { paket } from '@/assets/icons.js'
 
 export default {

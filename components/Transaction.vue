@@ -1,0 +1,217 @@
+<template>
+  <div class="wrapper" :data-open="state === 'open' ? 1 : 0">
+    <div class="bg" @click="() => setState('close')"></div>
+    <div
+      ref="card"
+      class="card w-full h-screen fixed bg-[#1C1C1E] rounded-t-3xl left-2/4 -translate-x-2/4 text-white max-w-[500px]"
+      :data-state="isMove ? 'move' : state"
+      :style="{ top: `${isMove ? y : calcY()}px` }"
+    >
+      <div class="pan-area" ref="pan">
+        <div
+          class="w-[100px] h-1 rounded-2xl bg-[#ffffff] opacity-30 mx-auto my-0 cursor-pointer mb-8"
+          ref="bar"
+        ></div>
+      </div>
+      <div class="contents">
+        <header class="w-full flex flex-col justify-center items-center my-5">
+          <div class="text-[32px]">
+            ۷۷,۳۴۵,۶۷۸ <span class="text-base opacity-50">ریال</span>
+          </div>
+          <div class="opacity-50">۲۸ اسفند ۱۴۰۱ | ۱۴:۲۹</div>
+        </header>
+        <div class="px-4 mb-5">
+          <div class="flex justify-between gap-4 mb-5">
+            <div
+              class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
+            >
+              <div
+                class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
+                v-html="arrow"
+              ></div>
+              <div class="flex flex-col gap-1">
+                <h4 class="text-xs opacity-30">منبع</h4>
+                <span class="text-lg">سامان </span>
+              </div>
+            </div>
+            <div
+              class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
+            >
+              <div
+                class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
+                v-html="arrow"
+              ></div>
+              <div class="flex flex-col gap-1">
+                <h4 class="text-xs opacity-30">دسته</h4>
+                <span class="text-lg">آموزش</span>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
+          >
+            <p class="opacity-50 mb-4">
+              سمینار ‘چیکار کنیم وقتی نمیدونیم چیکار کنیم؟’ از بهرامپور در سالن
+              همایش دانشگاه الزهرا
+            </p>
+
+            <div
+              class="p-2 text-sm bg-opacity-5 bg-[#ffffff] rounded-md text-[#949494]"
+            >
+              # برچسب
+            </div>
+          </div>
+        </div>
+        <div class="px-4 flex justify-center gap-3 items-stretch">
+          <button
+            class="bg-primary-paket bg-opacity-10 px-5 rounded-[14px]"
+            v-html="trash"
+          ></button>
+          <button
+            class="border-[1px] border-primary-paket rounded-[14px] grow py-4 font-bold text-primary-paket flex justify-center items-center gap-2"
+          >
+            <span v-html="editOrange" class="fill-primary-paket"></span>
+            ویرایش
+          </button>
+        </div>
+        <!-- <slot name></slot> -->
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { arrow, editOrange, trash } from '@/assets/icons.js'
+import Hammer from 'hammerjs'
+
+export default {
+  props: {
+    openY: {
+      type: Number,
+      default: 0.2,
+    },
+    halfY: {
+      type: Number,
+      default: 0.8,
+    },
+    defaultState: {
+      type: String,
+      default: 'close',
+    },
+  },
+  data() {
+    return {
+      mc: null,
+      y: 0,
+      startY: 0,
+      isMove: false,
+      state: this.defaultState,
+      rect: {},
+      arrow,
+      editOrange,
+      trash,
+    }
+  },
+  mounted() {
+    window.onresize = () => {
+      this.rect = this.$refs.card.getBoundingClientRect()
+    }
+    this.rect = this.$refs.card.getBoundingClientRect()
+
+    this.mc = new Hammer(this.$refs.pan)
+    this.mc.get('pan').set({ direction: Hammer.DIRECTION_ALL })
+
+    this.mc.on('panup pandown', (evt) => {
+      this.y = evt.center.y - 16
+    })
+
+    this.mc.on('panstart', (evt) => {
+      this.startY = evt.center.y
+      this.isMove = true
+    })
+
+    this.mc.on('panend', (evt) => {
+      this.isMove = false
+
+      switch (this.state) {
+        case 'half':
+          if (this.startY - evt.center.y > 120) {
+            this.state = 'open'
+          }
+
+          if (this.startY - evt.center.y < -50) {
+            this.state = 'close'
+          }
+          break
+        case 'open':
+          if (this.startY - evt.center.y < -120) {
+            this.state = 'close'
+          }
+          break
+      }
+    })
+  },
+  beforeDestroy() {
+    this.mc.destroy()
+    window.onresize = null
+  },
+  methods: {
+    calcY() {
+      switch (this.state) {
+        case 'close':
+          return this.rect.height
+        case 'open':
+          return this.rect.height * this.openY
+        case 'half':
+          return this.rect.height * this.halfY
+        default:
+          return this.y
+      }
+    },
+    setState(state) {
+      this.state = state
+    },
+  },
+}
+</script>
+
+<style lang="scss" scoped>
+.wrapper[data-open='1'] {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.wrapper[data-open='1'] .bg {
+  display: block;
+  transition: all 0.4s;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.card[data-state='half'],
+.card[data-state='open'],
+.card[data-state='close'] {
+  transition: top 0.4s ease-out;
+}
+
+.card[data-state='close'] {
+  box-shadow: none;
+}
+
+.pan-area {
+  padding: 12px 0;
+}
+
+.contents {
+  overflow-y: scroll;
+  max-height: 100%;
+  padding-bottom: calc(100vh * 0.2);
+  box-sizing: border-box;
+}
+</style>
