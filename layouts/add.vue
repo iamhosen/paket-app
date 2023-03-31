@@ -1,3 +1,5 @@
 <template>
-  <nuxt class="mt-4" />
+  <div class="mt-4">
+    <nuxt />
+  </div>
 </template>

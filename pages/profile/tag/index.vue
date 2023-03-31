@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex justify-between items-center h-[40px] mb-6 px-4">
-      <nuxt-link to="" v-html="plus"></nuxt-link>
-      <h1 class="text-2xl font-bold">برچسب ها</h1>
-      <a @click="$router.go(-1)" v-html="back"></a>
-    </div>
+    <the-header title="برچسب ها" add="/profile/tag/new"></the-header>
 
     <!-- items -->
     <div class="bg-bg-input-paket rounded-[14px] mx-4">
@@ -41,8 +37,12 @@
 </template>
 
 <script>
+import TheHeader from '@/components/ui/TheHeader.vue'
 import { back, plus } from '@/assets/icons.js'
 export default {
+  components: {
+    TheHeader,
+  },
   data() {
     return {
       back,

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <div class="w-full flex justify-between items-center h-[40px] mb-6 px-4">
-      <nuxt-link to="" v-html="plus"></nuxt-link>
-      <h1 class="text-2xl font-bold">منابع خرج</h1>
-      <a @click="$router.go(-1)" v-html="back"></a>
-    </div>
+    <the-header title="منابع خرج" add="/profile/source/new"></the-header>
 
     <!-- cards -->
     <div class="mx-4 flex flex-col gap-4">
@@ -31,14 +27,15 @@
 </template>
 
 <script>
-import { back, plus } from '@/assets/icons.js'
+import TheHeader from '@/components/ui/TheHeader.vue'
 import { toPersianNumberFormat } from '@/helpers/number.js'
 
 export default {
+  components: {
+    TheHeader,
+  },
   data() {
     return {
-      back,
-      plus,
       cards: [
         {
           id: 0,

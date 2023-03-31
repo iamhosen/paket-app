@@ -22,6 +22,7 @@ module.exports = {
     },
     fontFamily: {
       'xero': ['xero', 'sans-serif'],
+      'shabnam': ['shanam', 'sans-serif'],
     }
   },
   plugins: [],

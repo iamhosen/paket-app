@@ -1,11 +1,7 @@
 <template>
   <div>
     <!-- header -->
-    <div class="w-full flex justify-between items-center h-[40px] mb-6 px-4">
-      <nuxt-link to="" v-html="plus"></nuxt-link>
-      <h1 class="text-2xl font-bold">دسته بندی ها</h1>
-      <a @click="$router.go(-1)" v-html="back"></a>
-    </div>
+    <the-header title="دسته بندی ها" add="/profile/category/new"></the-header>
 
     <!-- tabs -->
     <div class="tab-head mb-5 mx-4">
@@ -75,7 +71,11 @@
 
 <script>
 import { back, plus, sub } from '@/assets/icons.js'
+import TheHeader from '@/components/ui/TheHeader.vue'
 export default {
+  components: {
+    TheHeader,
+  },
   data() {
     return {
       back,
