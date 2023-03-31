@@ -170,7 +170,7 @@ export default {
   data() {
     return {
       activeTab: 'income',
-      price: 0,
+      price: null,
       date: '',
       description: '',
 

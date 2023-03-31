@@ -11,19 +11,26 @@
 
 @font-face {
     font-family: shabnam;
-    src: url('../fonts/Shabnam-WOL.woff');
-    font-weight: 400;
+    src: url('../fonts/Shabnam-Thin-FD.woff');
+    font-weight: 100;
 }
 
 @font-face {
     font-family: shabnam;
-    src: url('../fonts/Shabnam-Bold-WOL.woff');
+    src: url('../fonts/Shabnam-FD.woff');
+    font-weight: 400;
+}
+
+
+@font-face {
+    font-family: shabnam;
+    src: url('../fonts/Shabnam-Bold-FD.woff');
     font-weight: 700;
 }
 
 @font-face {
     font-family: xero;
-    src: url('../fonts/code.xero.woff2');
+    src: url('../fonts/xero.woff2');
 }
 
 * {
