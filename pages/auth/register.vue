@@ -67,6 +67,7 @@ import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 export default {
   name: 'LoginPage',
   layout: 'auth',
+  middleware: ['auth'],
 
   components: {
     loadingSpinner,

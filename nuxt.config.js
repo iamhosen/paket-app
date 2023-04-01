@@ -74,7 +74,7 @@ export default {
   },
 
   router: {
-    middleware: 'auth'
+    middleware: 'guest'
   },
 
   toast: {
