@@ -21,8 +21,8 @@ export default {
   },
 
   env: {
-    supabaseUrl: process.env.SUPABASE_URL,
-    supabaseKey: process.env.SUPABASE_KEY,
+    supabaseUrl: "https://jicljgbbrmjdyhynrlre.supabase.co",
+    supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppY2xqZ2Jicm1qZHloeW5ybHJlIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODAyNDQ5MzMsImV4cCI6MTk5NTgyMDkzM30.WrLb7SbC8MTYEsUayIikz125HiGiQxxA6hdH1Z5mO0E",
   },
 
 
