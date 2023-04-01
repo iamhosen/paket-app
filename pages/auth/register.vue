@@ -1,10 +1,11 @@
 <template>
   <div>
-    <form action="" class="mb-8">
+    <form @submit.prevent="register" class="mb-8">
       <div
         class="paket-form bg-[#1c1c1e] w-full border-2 border-opacity-20 border-[#EB5340] rounded-xl px-4 mb-5"
       >
         <input
+          v-model="name"
           type="name"
           id="name"
           class="paket-form__input w-full bg-transparent py-4 focus:outline-none border-b-[0.5px] border-[#38383A]"
@@ -13,6 +14,7 @@
         />
 
         <input
+          v-model="email"
           type="email"
           id="email"
           class="paket-form__input w-full bg-transparent py-4 focus:outline-none border-b-[0.5px] border-[#38383A]"
@@ -21,6 +23,7 @@
         />
 
         <input
+          v-model="password"
           type="password"
           id="password"
           class="paket-form__input w-full bg-transparent border-none py-4 focus:outline-none"
@@ -29,10 +32,17 @@
         />
       </div>
       <button
-        type="button"
+        type="submit"
+        v-if="!isLoading"
         class="w-full py-3.5 bg-primary-paket rounded-xl text-center"
       >
         ثبت نام
+      </button>
+      <button
+        v-else
+        class="w-full py-3.5 border-0 border-primary-paket text-primary-paket bg-primary-paket bg-opacity-10 rounded-xl flex justify-center items-center"
+      >
+        <loading-spinner />
       </button>
     </form>
 
@@ -52,9 +62,48 @@
 </template>
 
 <script>
+import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+
 export default {
   name: 'LoginPage',
   layout: 'auth',
+
+  components: {
+    loadingSpinner,
+  },
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: '',
+      isLoading: false,
+    }
+  },
+  methods: {
+    async register() {
+      this.isLoading = true
+
+      const user = {
+        email: this.email,
+        password: this.password,
+        options: {
+          data: {
+            full_name: this.name,
+          },
+        },
+      }
+
+      await this.$store.dispatch('auth/register', user)
+
+      this.isLoading = false
+      this.$router.push('/')
+      this.$toast.show('ثبت نام با موفقیت انجام شد. خوش آمدید!', {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 3000,
+      })
+    },
+  },
 }
 </script>
 

@@ -9,6 +9,8 @@
 <script>
 import BottomNavigation from '../components/ui/BottomNavigation.vue'
 export default {
+  name: 'default',
   components: { BottomNavigation },
 }
 </script>
+

@@ -95,13 +95,17 @@
 
     <div class="mx-4 mb-5">
       <div class="bg-bg-input-paket rounded-[14px]">
-        <nuxt-link to="/auth/login" class="flex items-center mx-4 py-3 gap-4">
+        <button
+          @click="logout"
+          to="/auth/login"
+          class="flex items-center mx-4 py-3 gap-4"
+        >
           <div
             class="bg-[#FF453A] w-8 h-8 flex justify-center items-center rounded-lg"
             v-html="exit"
           ></div>
           <span class="py-2">خروج از حساب</span>
-        </nuxt-link>
+        </button>
       </div>
     </div>
 
@@ -138,6 +142,19 @@ export default {
       backup,
       exit,
     }
+  },
+
+  methods: {
+    logout() {
+      if (confirm('آیا مطمئن هستید؟')) {
+        this.$store.dispatch('auth/logout')
+        this.$toast.show('با موفقیت خارج شدید!', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      }
+    },
   },
 }
 </script>
