@@ -90,5 +90,9 @@ export const actions = {
         commit('setLoggedIn', false)
 
         this.$router.push('/auth/login')
+    },
+
+    getUser({ state }) {
+        return state.user
     }
 }

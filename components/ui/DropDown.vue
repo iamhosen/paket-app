@@ -32,7 +32,11 @@
       class="flex items-center p-4 bg-[#1F1F1F] rounded-xl mb-4 justify-between"
     >
       <div class="flex items-center">
-        <img class="w-8 h-8 ml-2 rounded-full" :src="selected.icon" />
+        <img
+          class="w-8 h-8 ml-2 rounded-full"
+          v-if="selected.icon"
+          :src="selected.icon"
+        />
         {{ selected.title }}
       </div>
 
@@ -87,7 +91,11 @@
             class="flex items-center py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             @click="select(item.id)"
           >
-            <img class="w-8 h-8 ml-2 rounded-full" :src="item.icon" />
+            <img
+              class="w-8 h-8 ml-2 rounded-full"
+              v-if="item.icon"
+              :src="item.icon"
+            />
             {{ item.title }}
           </span>
         </li>

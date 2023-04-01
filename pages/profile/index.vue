@@ -10,8 +10,8 @@
     >
       <img src="@/assets/profile.png" alt="پروفایل" class="h-[100%]" />
       <div class="p-2">
-        <h1 class="text-xl font-bold mb-1">{{ user.name }}</h1>
-        <span class="text-sm opacity-50">{{ user.email }}</span>
+        <h1 class="text-xl font-bold mb-1">{{ user?.name }}</h1>
+        <span class="text-sm opacity-50">{{ user?.email }}</span>
       </div>
     </div>
 
@@ -149,8 +149,8 @@ export default {
       const user = this.$store.getters['auth/user']
 
       return {
-        name: user.user_metadata.full_name,
-        email: user.email,
+        name: user?.user_metadata.full_name,
+        email: user?.email,
       }
     },
   },
