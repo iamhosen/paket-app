@@ -41,7 +41,9 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+    '@nuxtjs/pwa',
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -88,5 +90,21 @@ export default {
     //     }
     //   }
     // ]
+  },
+
+  pwa: {
+    meta: {
+      theme_color: '#EB5340',
+      mobileAppIOS: true,
+      mobileApp: true,
+      appleStatusBarStyle: '#171717'
+    },
+    manifest: {
+      name: 'پاکِت | مدیریت مالی شخصی',
+      short_name: 'پاکِت',
+      description: 'مدیریت مالی شخصی',
+      background_color: '#EB5340',
+
+    },
   }
 }

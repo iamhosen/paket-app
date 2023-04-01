@@ -25,6 +25,7 @@
     "vue-template-compiler": "^2.7.10"
   },
   "devDependencies": {
+    "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/supabase": "^0.3.4-beta.0",
     "autoprefixer": "^10.4.14",
     "eslint-config-prettier": "^8.5.0",
