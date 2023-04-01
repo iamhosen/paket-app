@@ -94,15 +94,25 @@ export default {
         },
       }
 
-      await this.$store.dispatch('auth/register', user)
+      try {
+        await this.$store.dispatch('auth/register', user)
+
+        this.$router.push('/')
+        this.$toast.show('ثبت نام با موفقیت انجام شد. خوش آمدید!', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      } catch (err) {
+        console.log(err)
+        this.$toast.error(err, {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      }
 
       this.isLoading = false
-      this.$router.push('/')
-      this.$toast.show('ثبت نام با موفقیت انجام شد. خوش آمدید!', {
-        theme: 'toasted-primary',
-        position: 'top-center',
-        duration: 3000,
-      })
     },
   },
 }

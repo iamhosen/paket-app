@@ -24,45 +24,38 @@ export const mutations = {
 
 export const actions = {
     async register({ commit }, user) {
-        try {
-            const { data, error } = await this.$supabase.auth.signUp(user);
+        const { data, error } = await this.$supabase.auth.signUp(user);
 
-            if (error) {
-                throw new Error(error.message)
-            }
-
-            commit('setUser', data.user)
-            commit('setToken', data.session.access_token)
-            commit('setLoggedIn', true)
-
-            localStorage.setItem('token', data.session.access_token)
-            localStorage.setItem('expiresAt', data.session.expires_at)
-
-            this.$axios.setHeader('Authorization', `Bearer ${data.session.access_token}`)
-        } catch (error) {
-            console.error(error);
+        if (error) {
+            throw new Error(error.message)
         }
+
+        commit('setUser', data.user)
+        commit('setToken', data.session.access_token)
+        commit('setLoggedIn', true)
+
+        localStorage.setItem('token', data.session.access_token)
+        localStorage.setItem('expiresAt', data.session.expires_at)
+
+        this.$axios.setHeader('Authorization', `Bearer ${data.session.access_token}`)
+
     },
 
     async login({ commit }, user) {
-        try {
-            const { data, error } = await this.$supabase.auth.signInWithPassword(user);
+        const { data, error } = await this.$supabase.auth.signInWithPassword(user);
 
-            if (error) {
-                throw new Error(error.message)
-            }
-
-            commit('setUser', data.user)
-            commit('setToken', data.session.access_token)
-            commit('setLoggedIn', true)
-
-            localStorage.setItem('token', data.session.access_token)
-            localStorage.setItem('expiresAt', data.session.expires_at)
-
-            this.$axios.setHeader('Authorization', `Bearer ${data.session.access_token}`)
-        } catch (error) {
-            console.error(error);
+        if (error) {
+            throw new Error(error.message)
         }
+
+        commit('setUser', data.user)
+        commit('setToken', data.session.access_token)
+        commit('setLoggedIn', true)
+
+        localStorage.setItem('token', data.session.access_token)
+        localStorage.setItem('expiresAt', data.session.expires_at)
+
+        this.$axios.setHeader('Authorization', `Bearer ${data.session.access_token}`)
     },
 
     async tryLogin({ commit, dispatch }) {
@@ -83,23 +76,19 @@ export const actions = {
     },
 
     async logout({ commit }) {
-        try {
-            const { error } = await this.$supabase.auth.signOut()
+        const { error } = await this.$supabase.auth.signOut()
 
-            if (error) {
-                throw new Error(error.message)
-            }
-
-            localStorage.removeItem('token')
-            localStorage.removeItem('expiresAt')
-
-            commit('setUser', null)
-            commit('setToken', null)
-            commit('setLoggedIn', false)
-
-            this.$router.push('/auth/login')
-        } catch (err) {
-            console.error(err)
+        if (error) {
+            throw new Error(error.message)
         }
+
+        localStorage.removeItem('token')
+        localStorage.removeItem('expiresAt')
+
+        commit('setUser', null)
+        commit('setToken', null)
+        commit('setLoggedIn', false)
+
+        this.$router.push('/auth/login')
     }
 }

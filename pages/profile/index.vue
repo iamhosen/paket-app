@@ -10,8 +10,8 @@
     >
       <img src="@/assets/profile.png" alt="پروفایل" class="h-[100%]" />
       <div class="p-2">
-        <h1 class="text-xl font-bold mb-1">حسین امیرحسینی</h1>
-        <span class="text-sm opacity-50">hamirhosseini@gmail.com</span>
+        <h1 class="text-xl font-bold mb-1">{{ user.name }}</h1>
+        <span class="text-sm opacity-50">{{ user.email }}</span>
       </div>
     </div>
 
@@ -58,7 +58,7 @@
       </div>
     </div>
 
-    <div class="mx-4 mb-5">
+    <div class="mx-4 mb-5 hidden">
       <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">
         اطلاعات کاربری
       </h3>
@@ -144,15 +144,34 @@ export default {
     }
   },
 
+  computed: {
+    user() {
+      const user = this.$store.getters['auth/user']
+
+      return {
+        name: user.user_metadata.full_name,
+        email: user.email,
+      }
+    },
+  },
+
   methods: {
     logout() {
       if (confirm('آیا مطمئن هستید؟')) {
-        this.$store.dispatch('auth/logout')
-        this.$toast.show('با موفقیت خارج شدید!', {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 3000,
-        })
+        try {
+          this.$store.dispatch('auth/logout')
+          this.$toast.show('با موفقیت خارج شدید!', {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000,
+          })
+        } catch (err) {
+          this.$toast.error(err, {
+            theme: 'toasted-primary',
+            position: 'top-center',
+            duration: 3000,
+          })
+        }
       }
     },
   },

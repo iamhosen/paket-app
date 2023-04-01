@@ -78,15 +78,25 @@ export default {
         password: this.password,
       }
 
-      await this.$store.dispatch('auth/login', user)
+      try {
+        await this.$store.dispatch('auth/login', user)
+
+        this.$router.push('/')
+        this.$toast.show('با موفقیت وارد شدید!', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      } catch (err) {
+        console.log(err)
+        this.$toast.error(err, {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      }
 
       this.isLoading = false
-      this.$router.push('/')
-      this.$toast.show('با موفقیت وارد شدید!', {
-        theme: 'toasted-primary',
-        position: 'top-center',
-        duration: 3000,
-      })
     },
   },
 }
