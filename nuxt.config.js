@@ -97,7 +97,7 @@ export default {
       theme_color: '#EB5340',
       mobileAppIOS: true,
       mobileApp: true,
-      appleStatusBarStyle: 'dark'
+      appleStatusBarStyle: 'black'
     },
     manifest: {
       name: 'پاکِت | مدیریت مالی شخصی',
