@@ -61,5 +61,4 @@ export const actions = {
 
         await dispatch('fetchTags')
     }
-    //getTransactions
 }

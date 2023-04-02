@@ -7,7 +7,11 @@
         v-for="tab in tabs"
         :key="tab.id"
         @click="changeTab(tab)"
-        :class="activeTabId == tab.id ? 'bg-primary-paket rounded-lg' : ''"
+        :class="
+          activeTabId == tab.id
+            ? `bg-${tab.color ? `[${tab.color}]` : 'primary-paket'} rounded-lg`
+            : ''
+        "
         class="w-1/2 text-center py-1 transition-all"
       >
         {{ tab.title }}

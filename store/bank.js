@@ -37,7 +37,6 @@ export const actions = {
 
         commit('setBanks', data)
     },
-    //edit
     async edit({ dispatch }, bank) {
         const { data, error } = await this.$supabase
             .from('Banks')
@@ -50,7 +49,6 @@ export const actions = {
 
         await dispatch('fetchBanks')
     },
-    //delete
     async delete({ dispatch }, id) {
         const { data, error } = await this.$supabase
             .from('Banks')
@@ -62,6 +60,18 @@ export const actions = {
         }
 
         await dispatch('fetchBanks')
+    },
+    async updateBankTotal({ dispatch }, { bank, amount }) {
+        const { data, error } = await this.$supabase
+            .from('Banks')
+            .update({ total_amount: +(bank.total_amount + amount) })
+            .match({ id: bank.id })
+
+        if (error) {
+            throw new Error(error.message)
+        }
+
+        await dispatch('fetchBanks')
     }
-    //getTransactions
+
 }
