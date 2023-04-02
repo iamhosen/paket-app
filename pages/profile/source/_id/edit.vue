@@ -123,7 +123,6 @@ export default {
       isLoading: false,
 
       bank: null,
-
       card_number: null,
       description: null,
     }
