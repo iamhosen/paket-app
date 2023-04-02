@@ -3,50 +3,51 @@
     <the-header title="برچسب ها" add="/profile/tag/new"></the-header>
 
     <!-- items -->
-    <div class="bg-bg-input-paket rounded-[14px] mx-4">
-      <nuxt-link
-        to="/profile/tag/id"
-        class="flex items-center mx-4 py-4 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-      >
-        <div
-          class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-          v-html="back"
-        ></div>
-        <span class="py-2">خوراکی</span>
-      </nuxt-link>
-
-      <nuxt-link
-        to=""
-        class="flex items-center mx-4 py-4 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-      >
-        <div
-          class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-          v-html="back"
-        ></div>
-        <span class="py-2">خوراکی</span>
-      </nuxt-link>
-      <nuxt-link to="" class="flex items-center mx-4 py-4 gap-4">
-        <div
-          class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-          v-html="back"
-        ></div>
-        <span class="py-2">خوراکی</span>
-      </nuxt-link>
+    <div v-if="isLoading" class="flex justify-center items-center h-48">
+      <loadingSpinner class="h-16 w-16"></loadingSpinner>
     </div>
+    <div v-else-if="tags.length" class="bg-bg-input-paket rounded-[14px] mx-4">
+      <tag-item v-for="tag in tags" :key="tag.id" :tag="tag"></tag-item>
+    </div>
+    <div v-else>برچسبی موجود نیست!</div>
   </div>
 </template>
 
 <script>
 import TheHeader from '@/components/ui/TheHeader.vue'
-import { back, plus } from '@/assets/icons.js'
+import TagItem from '@/components/TagItem.vue'
+import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+
 export default {
   components: {
     TheHeader,
+    TagItem,
+    loadingSpinner,
   },
+
   data() {
     return {
-      back,
-      plus,
+      isLoading: false,
+    }
+  },
+
+  computed: {
+    tags() {
+      return this.$store.getters['tag/tags']
+    },
+  },
+
+  async fetch() {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('tag/fetchTags')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }

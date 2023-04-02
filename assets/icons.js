@@ -80,3 +80,11 @@ export const trash = `<svg width="19" height="20" viewBox="0 0 19 20" fill="none
 <path d="M11.2791 9.22791V13.8604" stroke="#EB5340" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 `
+
+export const hash = `<svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M3.08838 6.94873H15.4417" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M3.08838 11.5812H15.4417" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.72092 2.31622L6.17676 16.2137" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.3532 2.31622L10.8091 16.2137" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+`

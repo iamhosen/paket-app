@@ -3,7 +3,10 @@
     <the-header title="منابع خرج" add="/profile/source/new"></the-header>
 
     <!-- cards -->
-    <div v-if="banks?.length" class="mx-4 flex flex-col gap-4">
+    <div v-if="isLoading" class="flex justify-center items-center h-48">
+      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+    </div>
+    <div v-else-if="banks.length" class="mx-4 flex flex-col gap-4">
       <bank-card v-for="bank in banks" :key="bank.id" :card="bank"></bank-card>
     </div>
     <div v-else>منبعی موجود نیست!</div>
@@ -13,48 +16,17 @@
 <script>
 import TheHeader from '@/components/ui/TheHeader.vue'
 import BankCard from '@/components/BankCard.vue'
+import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
     BankCard,
+    loadingSpinner,
   },
   data() {
     return {
-      // cards: [
-      //   {
-      //     id: 0,
-      //     bank: 'SAMAN',
-      //     title: 'بانک سامان',
-      //     cardNumber: '6219 8619 6169 3270',
-      //     total: 14800500,
-      //     color: '#0075BC',
-      //   },
-      //   {
-      //     id: 1,
-      //     bank: 'BLUBANK',
-      //     title: 'بلوبانک',
-      //     cardNumber: '6219 8619 6169 3270',
-      //     total: 14480000,
-      //     color: '#CD323C',
-      //   },
-      //   {
-      //     id: 2,
-      //     bank: 'SADERAT',
-      //     title: 'بانک صادرات',
-      //     cardNumber: '6219 8619 6169 3270',
-      //     total: 12480000,
-      //     color: '#00006F',
-      //   },
-      //   {
-      //     id: 3,
-      //     bank: 'PASARGAD',
-      //     title: 'بانک پاسارگاد',
-      //     cardNumber: '6219 8619 6169 3270',
-      //     total: 148000330,
-      //     color: '#F3B23E',
-      //   },
-      // ],
+      isLoading: false,
     }
   },
 
@@ -63,10 +35,19 @@ export default {
       return this.$store.getters['bank/banks']
     },
   },
-  methods: {},
 
   async fetch() {
-    await this.$store.dispatch('bank/fetchBanks')
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('bank/fetchBanks')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
+    }
   },
 }
 </script>

@@ -1,5 +1,4 @@
 export default function ({ redirect, route, store }) {
-    console.log('GUEST MIDDLEWARE');
     const token = localStorage.getItem('token')
     const expiresAt = localStorage.getItem('expiresAt') * 1000
 

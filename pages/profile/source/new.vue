@@ -72,7 +72,7 @@
         v-model="description"
         placeholder="توضیحات"
         rows="5"
-        class="w-full bg-[#1F1F1F] rounded-xl p-4 text-[#8F8F8F] mb-8 focus:outline-none"
+        class="w-full bg-[#1F1F1F] rounded-xl p-4 placeholder:text-[#8F8F8F] mb-8 focus:outline-none"
       >
       </textarea>
 
@@ -97,11 +97,13 @@
 <script>
 import TheHeader from '~/components/ui/TheHeader.vue'
 import DropDown from '~/components/ui/DropDown.vue'
+import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
     DropDown,
+    loadingSpinner,
   },
   data() {
     return {
@@ -110,21 +112,25 @@ export default {
           id: 1,
           key: 'BLUBANK',
           title: 'بلوبانک',
+          color: '#CD323C',
         },
         {
           id: 2,
           key: 'SAMAN',
           title: 'سامان',
+          color: '#0075BC',
         },
         {
           id: 3,
           key: 'PASARGAD',
-          title: 'پاساردگاد',
+          title: 'پاسارگاد',
+          color: '#F3B23E',
         },
         {
           id: 4,
           key: 'SADERAT',
           title: 'صادرات',
+          color: '#00006F',
         },
       ],
 
@@ -142,7 +148,7 @@ export default {
     setBank(bank) {
       this.bank = bank
     },
-    createBank() {
+    async createBank() {
       let data
 
       if (this.type === 'bank') {
@@ -166,7 +172,9 @@ export default {
       }
 
       try {
-        this.$store.dispatch('bank/create', data)
+        this.isLoading = true
+        await this.$store.dispatch('bank/create', data)
+        this.isLoading = false
 
         this.$toast.success('منبع جدید با موفقیت ایجاد شد.', {
           theme: 'toasted-primary',

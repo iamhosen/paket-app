@@ -1,59 +1,57 @@
 export const state = () => ({
-    banks: []
+    tags: []
 })
 
 export const getters = {
-    banks: state => state.banks,
+    tags: state => state.tags,
 
-    getBankById: (state) => (id) => state.banks.find(bank => bank.id == id)
+    getTagById: (state) => (id) => state.tags.find(tag => tag.id == id)
 }
 
 export const mutations = {
-    setBanks(state, banks) {
-        state.banks = banks
+    setTags(state, tags) {
+        state.tags = tags
     },
 }
 
 export const actions = {
-    async fetchBanks({ commit }) {
+    async fetchTags({ commit }) {
         const { data, error } = await this.$supabase
-            .from('Banks')
+            .from('Tags')
             .select('*')
 
         if (error) {
             throw new Error(error.message)
         }
 
-        commit('setBanks', data)
+        commit('setTags', data)
     },
-    async create({ commit }, bank) {
+    async create({ commit }, tag) {
         const { data, error } = await this.$supabase
-            .from('Banks')
-            .insert(bank)
+            .from('Tags')
+            .insert(tag)
 
         if (error) {
             throw new Error(error.message)
         }
 
-        commit('setBanks', data)
+        commit('setTags', data)
     },
-    //edit
-    async edit({ dispatch }, bank) {
+    async edit({ dispatch }, tag) {
         const { data, error } = await this.$supabase
-            .from('Banks')
-            .update(bank)
-            .match({ id: bank.id })
+            .from('Tags')
+            .update(tag)
+            .match({ id: tag.id })
 
         if (error) {
             throw new Error(error.message)
         }
 
-        await dispatch('fetchBanks')
+        await dispatch('fetchTags')
     },
-    //delete
     async delete({ dispatch }, id) {
         const { data, error } = await this.$supabase
-            .from('Banks')
+            .from('Tags')
             .delete()
             .match({ id: id })
 
@@ -61,7 +59,7 @@ export const actions = {
             throw new Error(error.message)
         }
 
-        await dispatch('fetchBanks')
+        await dispatch('fetchTags')
     }
     //getTransactions
 }

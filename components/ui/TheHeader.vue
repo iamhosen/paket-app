@@ -3,13 +3,19 @@
     <nuxt-link v-if="add" :to="add">
       <span v-html="plus"></span>
     </nuxt-link>
+    <nuxt-link v-if="edit" :to="edit">
+      <span v-html="editIcon"></span>
+    </nuxt-link>
+    <a v-if="trash" @click="deleteItem">
+      <span v-html="trashIcon"></span>
+    </a>
     <h1 class="text-2xl font-bold">{{ title }}</h1>
     <a @click="$router.go(-1)" v-html="back"></a>
   </div>
 </template>
 
 <script>
-import { back, plus } from '@/assets/icons.js'
+import { back, plus, edit, trash } from '@/assets/icons.js'
 
 export default {
   props: {
@@ -21,9 +27,23 @@ export default {
       type: String,
       default: '',
     },
+    edit: {
+      type: String,
+      default: '',
+    },
+    trash: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
-    return { back, plus }
+    return { back, plus, editIcon: edit, trashIcon: trash }
+  },
+
+  methods: {
+    deleteItem() {
+      this.$emit('delete')
+    },
   },
 }
 </script>

@@ -97,14 +97,13 @@ export default {
       theme_color: '#EB5340',
       mobileAppIOS: true,
       mobileApp: true,
-      appleStatusBarStyle: 'black'
+      appleStatusBarStyle: 'dark'
     },
     manifest: {
       name: 'پاکِت | مدیریت مالی شخصی',
       short_name: 'Paket',
       description: 'مدیریت مالی شخصی',
-      background_color: '#EB5340',
-
+      background_color: '#171717',
     },
   }
 }
