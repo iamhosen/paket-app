@@ -94,7 +94,7 @@ export default {
 
   pwa: {
     meta: {
-      theme_color: '#EB5340',
+      theme_color: '#171717',
       mobileAppIOS: true,
       mobileApp: true,
       appleStatusBarStyle: 'black'
