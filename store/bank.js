@@ -61,10 +61,12 @@ export const actions = {
 
         await dispatch('fetchBanks')
     },
-    async updateBankTotal({ dispatch }, { bank, amount }) {
+    async updateBankTotal({ dispatch }, { bank, amount, isDelete = false }) {
+        amount = parseFloat(amount)
+
         const { data, error } = await this.$supabase
             .from('Banks')
-            .update({ total_amount: +(bank.total_amount + amount) })
+            .update({ total_amount: isDelete ? (bank.total_amount - amount) : (bank.total_amount + amount) })
             .match({ id: bank.id })
 
         if (error) {

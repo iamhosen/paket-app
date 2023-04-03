@@ -14,75 +14,13 @@
         ></div>
       </div>
       <div class="contents">
-        <header class="w-full flex flex-col justify-center items-center my-5">
-          <div class="text-[32px]">
-            ۷۷,۳۴۵,۶۷۸ <span class="text-base opacity-50">ریال</span>
-          </div>
-          <div class="opacity-50">۲۸ اسفند ۱۴۰۱ | ۱۴:۲۹</div>
-        </header>
-        <div class="px-4 mb-5">
-          <div class="flex justify-between gap-4 mb-5">
-            <div
-              class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
-            >
-              <div
-                class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
-                v-html="arrow"
-              ></div>
-              <div class="flex flex-col gap-1">
-                <h4 class="text-xs opacity-30">منبع</h4>
-                <span class="text-lg">سامان </span>
-              </div>
-            </div>
-            <div
-              class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
-            >
-              <div
-                class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-                v-html="arrow"
-              ></div>
-              <div class="flex flex-col gap-1">
-                <h4 class="text-xs opacity-30">دسته</h4>
-                <span class="text-lg">آموزش</span>
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
-          >
-            <p class="opacity-50 mb-4">
-              سمینار ‘چیکار کنیم وقتی نمیدونیم چیکار کنیم؟’ از بهرامپور در سالن
-              همایش دانشگاه الزهرا
-            </p>
-
-            <div
-              class="p-2 text-sm bg-opacity-5 bg-[#ffffff] rounded-md text-[#949494]"
-            >
-              # برچسب
-            </div>
-          </div>
-        </div>
-        <div class="px-4 flex justify-center gap-3 items-stretch">
-          <button
-            class="bg-primary-paket bg-opacity-10 px-5 rounded-[14px]"
-            v-html="trash"
-          ></button>
-          <button
-            class="border-[1px] border-primary-paket rounded-[14px] grow py-4 font-bold text-primary-paket flex justify-center items-center gap-2"
-          >
-            <span v-html="editOrange" class="fill-primary-paket"></span>
-            ویرایش
-          </button>
-        </div>
-        <!-- <slot name></slot> -->
+        <slot></slot>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { arrow, editOrange, trash } from '@/assets/icons.js'
 import Hammer from 'hammerjs'
 
 export default {
@@ -108,9 +46,6 @@ export default {
       isMove: false,
       state: this.defaultState,
       rect: {},
-      arrow,
-      editOrange,
-      trash,
     }
   },
   mounted() {

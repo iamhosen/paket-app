@@ -10,19 +10,19 @@
         @monthChanged="updateSelectedMonth"
       />
 
-      <transaction-list :transactions="selectedMonthTransactions" />
+      <transaction-list-month :transactions="selectedMonthTransactions" />
     </div>
   </div>
 </template>
 
 <script>
 import MonthSelector from '@/components/MonthSelector.vue'
-import TransactionList from '@/components/TransactionList.vue'
+import TransactionListMonth from '@/components/TransactionListMonth.vue'
 
 export default {
   components: {
     MonthSelector,
-    TransactionList,
+    TransactionListMonth,
   },
   data() {
     return {

@@ -81,7 +81,7 @@
             :placeholder="card_number"
             type="number"
             inputmode="numeric"
-            class="font-xero text-left grow focus:outline-none bg-transparent placeholder:opacity-50"
+            class="ltr font-xero text-left grow focus:outline-none bg-transparent placeholder:opacity-50"
             autofocus
           />
         </div>
