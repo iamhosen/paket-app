@@ -130,22 +130,17 @@ export default {
   },
 
   async fetch() {
-    if (this.tags.length === 0) {
-      try {
-        this.isLoading = true
-        await this.$store.dispatch('tag/fetchTags')
-        this.isLoading = false
-
-        this.setTag()
-      } catch (err) {
-        this.$toast.error(err, {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 10000,
-        })
-      }
-    } else {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
       this.setTag()
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }

@@ -175,5 +175,19 @@ export default {
       }
     },
   },
+
+  async fetch() {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
+    }
+  },
 }
 </script>

@@ -144,18 +144,16 @@ export default {
   },
 
   async fetch() {
-    if (this.tags.length === 0) {
-      try {
-        this.isLoading = true
-        await this.$store.dispatch('tag/fetchTags')
-        this.isLoading = false
-      } catch (err) {
-        this.$toast.error(err, {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 10000,
-        })
-      }
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }

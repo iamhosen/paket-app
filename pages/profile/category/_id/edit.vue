@@ -123,22 +123,17 @@ export default {
   },
 
   async fetch() {
-    if (this.categories.length === 0) {
-      try {
-        this.isLoading = true
-        await this.$store.dispatch('category/fetchCategories')
-        this.isLoading = false
-
-        this.setCategory()
-      } catch (err) {
-        this.$toast.error(err, {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 10000,
-        })
-      }
-    } else {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
       this.setCategory()
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }

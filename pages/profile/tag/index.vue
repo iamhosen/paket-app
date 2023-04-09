@@ -40,7 +40,7 @@ export default {
   async fetch() {
     try {
       this.isLoading = true
-      await this.$store.dispatch('tag/fetchTags')
+      await this.$store.dispatch('loadUserData')
       this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {

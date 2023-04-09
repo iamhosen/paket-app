@@ -202,22 +202,17 @@ export default {
   },
 
   async fetch() {
-    if (this.banks.length === 0) {
-      try {
-        this.isLoading = true
-        await this.$store.dispatch('bank/fetchBanks')
-        this.isLoading = false
-
-        this.setBank()
-      } catch (err) {
-        this.$toast.error(err, {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 10000,
-        })
-      }
-    } else {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
       this.setBank()
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }

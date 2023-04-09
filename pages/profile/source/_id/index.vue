@@ -169,21 +169,16 @@ export default {
   },
 
   async fetch() {
-    if (this.banks.length === 0) {
-      try {
-        this.isLoading = true
-        await this.$store.dispatch('bank/fetchBanks')
-        await this.$store.dispatch('category/fetchCategories')
-        await this.$store.dispatch('transaction/fetchTransactions')
-        await this.$store.dispatch('tag/fetchTags')
-        this.isLoading = false
-      } catch (err) {
-        this.$toast.error(err, {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 10000,
-        })
-      }
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
     }
   },
 }
