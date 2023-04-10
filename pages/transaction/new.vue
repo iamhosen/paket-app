@@ -71,18 +71,14 @@
             label="انتقال از"
             title="منبع"
             type="source"
-            :items="[
-              { id: 1, title: 'بلوبانک', icon: '/_nuxt/assets/profile.png' },
-            ]"
+            :items="banks"
             @selected="setSource"
           ></drop-down>
           <drop-down
             label="انتقال به"
             title="منبع"
             type="source"
-            :items="[
-              { id: 1, title: 'بلوبانک', icon: '/_nuxt/assets/profile.png' },
-            ]"
+            :items="banks"
             @selected="setToSource"
           ></drop-down>
           <div class="bg-[#1F1F1F] flex justify-between p-4 rounded-xl mb-4">
@@ -235,6 +231,15 @@ export default {
     },
 
     async createTransaction() {
+      if (this.type === 'transition') {
+        // data.type = 'transition'
+        this.doTransition()
+      } else {
+        this.doTransaction()
+      }
+    },
+
+    async doTransaction() {
       let transaction = {
         user_id: this.$store.getters['auth/user'].id,
         date: this.date,
@@ -242,16 +247,12 @@ export default {
         description: this.description,
       }
 
-      if (this.type === 'transition') {
-        // data.type = 'transition'
-      } else {
-        transaction.category_id = this.selectedCategory.id
-        transaction.bank_id = this.selectedSource.id
-        if (this.selectedTag) transaction.tag_id = this.selectedTag.id
+      transaction.category_id = this.selectedCategory.id
+      transaction.bank_id = this.selectedSource.id
+      if (this.selectedTag) transaction.tag_id = this.selectedTag.id
 
-        if (this.type === 'deposit') transaction.amount = this.total
-        else transaction.amount = -this.total
-      }
+      if (this.type === 'deposit') transaction.amount = this.total
+      else transaction.amount = -this.total
 
       try {
         this.isLoading = true
@@ -276,14 +277,64 @@ export default {
         })
       }
     },
+    async doTransition() {
+      let outTransaction = {
+        user_id: this.$store.getters['auth/user'].id,
+        date: this.date,
+        sms: null,
+        category_id: 16,
+        description: this.description,
+      }
+      let inTransaction = {
+        user_id: this.$store.getters['auth/user'].id,
+        date: this.date,
+        sms: null,
+        category_id: 16,
+        description: this.description,
+      }
+
+      //withdraw
+      outTransaction.bank_id = this.selectedSource.id
+      outTransaction.amount = -this.total
+
+      //deposit
+      inTransaction.bank_id = this.selectedToSource.id
+      inTransaction.amount = +this.total
+
+      if (this.selectedTag) {
+        outTransaction.tag_id = this.selectedTag.id
+        inTransaction.tag_id = this.selectedTag.id
+      }
+
+      try {
+        this.isLoading = true
+        this.$store.dispatch('transaction/createTransition', {
+          inTransaction,
+          outTransaction,
+          wageTotal: this.wage ? this.wageTotal : null,
+        })
+        this.isLoading = false
+
+        this.$toast.success('تراکنش با موفقیت ثبت شد.', {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+        this.$router.push('/transaction')
+      } catch (err) {
+        this.$toast.error(err, {
+          theme: 'toasted-primary',
+          position: 'top-center',
+          duration: 3000,
+        })
+      }
+    },
   },
 
   async fetch() {
     try {
       this.isLoading = true
-      await this.$store.dispatch('category/fetchCategories')
-      await this.$store.dispatch('tag/fetchTags')
-      await this.$store.dispatch('bank/fetchBanks')
+      await this.$store.dispatch('loadUserData')
       this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {

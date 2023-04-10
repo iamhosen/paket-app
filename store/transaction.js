@@ -27,7 +27,7 @@ export const actions = {
 
         commit('setTransactions', data)
     },
-    async create({ dispatch, root }, transaction) {
+    async create({ dispatch, rootGetters }, transaction) {
         const { data, error } = await this.$supabase
             .from('Transactions')
             .insert(transaction)
@@ -35,6 +35,15 @@ export const actions = {
         if (error) {
             throw new Error(error.message)
         }
+
+        //update bank total
+        const bank = rootGetters['bank/getBankById'](transaction.bank_id)
+        await dispatch('bank/updateBankTotal', {
+            bank,
+            amount: transaction.amount,
+            isDelelte: transaction.amount < 0 ? true : false
+        }, { root: true })
+
         await dispatch('fetchTransactions')
     },
     async edit({ dispatch }, transaction) {
@@ -60,5 +69,22 @@ export const actions = {
         }
 
         await dispatch('fetchTransactions')
+    },
+    async createTransition({ dispatch, rootGetters }, { inTransaction, outTransaction, wageTotal = null }) {
+        await dispatch('create', inTransaction)
+        await dispatch('create', outTransaction)
+
+        //wage
+        if (wageTotal) {
+            await dispatch('create', {
+                user_id: rootGetters['auth/user'].id,
+                date: inTransaction.date,
+                sms: null,
+                category_id: 16,
+                description: inTransaction.description,
+                bank_id: inTransaction.bank_id,
+                amount: -wageTotal
+            })
+        }
     }
 }

@@ -4,7 +4,7 @@ export const state = () => ({
 
 export const actions = {
     async loadUserData({ state, dispatch }) {
-        console.log('loadUserDate is loading ...');
+        console.log('loadUserData is loading ...');
         //load transactions
         if (!state.transaction.transactions.length)
             await dispatch('transaction/fetchTransactions')
