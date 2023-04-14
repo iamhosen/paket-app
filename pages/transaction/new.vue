@@ -257,10 +257,6 @@ export default {
       try {
         this.isLoading = true
         await this.$store.dispatch('transaction/create', transaction)
-        await this.$store.dispatch('bank/updateBankTotal', {
-          bank: this.selectedSource,
-          amount: +transaction.amount,
-        })
         this.isLoading = false
 
         this.$toast.success('تراکنش با موفقیت ثبت شد.', {
@@ -284,6 +280,8 @@ export default {
         sms: null,
         category_id: 16,
         description: this.description,
+        bank_id: this.selectedSource.id,
+        amount: -this.total,
       }
       let inTransaction = {
         user_id: this.$store.getters['auth/user'].id,
@@ -291,15 +289,9 @@ export default {
         sms: null,
         category_id: 16,
         description: this.description,
+        bank_id: this.selectedToSource.id,
+        amount: +this.total,
       }
-
-      //withdraw
-      outTransaction.bank_id = this.selectedSource.id
-      outTransaction.amount = -this.total
-
-      //deposit
-      inTransaction.bank_id = this.selectedToSource.id
-      inTransaction.amount = +this.total
 
       if (this.selectedTag) {
         outTransaction.tag_id = this.selectedTag.id

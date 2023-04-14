@@ -36,15 +36,8 @@ export const actions = {
             throw new Error(error.message)
         }
 
-        //update bank total
-        const bank = rootGetters['bank/getBankById'](transaction.bank_id)
-        await dispatch('bank/updateBankTotal', {
-            bank,
-            amount: transaction.amount,
-            isDelelte: transaction.amount < 0 ? true : false
-        }, { root: true })
-
         await dispatch('fetchTransactions')
+        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
     },
     async edit({ dispatch }, transaction) {
         const { data, error } = await this.$supabase
@@ -57,32 +50,36 @@ export const actions = {
         }
 
         await dispatch('fetchTransactions')
+        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
+
     },
-    async delete({ dispatch }, id) {
+    async delete({ dispatch }, transaction) {
         const { data, error } = await this.$supabase
             .from('Transactions')
             .delete()
-            .match({ id: id })
+            .match({ id: transaction.id })
 
         if (error) {
             throw new Error(error.message)
         }
 
         await dispatch('fetchTransactions')
+        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
+
     },
     async createTransition({ dispatch, rootGetters }, { inTransaction, outTransaction, wageTotal = null }) {
-        await dispatch('create', inTransaction)
         await dispatch('create', outTransaction)
+        await dispatch('create', inTransaction)
 
         //wage
         if (wageTotal) {
             await dispatch('create', {
                 user_id: rootGetters['auth/user'].id,
-                date: inTransaction.date,
+                date: outTransaction.date,
                 sms: null,
-                category_id: 16,
+                category_id: 15,
                 description: inTransaction.description,
-                bank_id: inTransaction.bank_id,
+                bank_id: outTransaction.bank_id,
                 amount: -wageTotal
             })
         }

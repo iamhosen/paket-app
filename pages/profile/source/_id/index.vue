@@ -131,6 +131,9 @@ export default {
         // Add the transaction to the day object
         day.sum += transaction.amount // Assuming there's an amount property on each transaction
         day.transactions.push(transaction)
+        day.transactions.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date)
+        })
       })
 
       days.sort((a, b) => {

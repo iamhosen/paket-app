@@ -57,7 +57,7 @@
       <button
         class="bg-primary-paket bg-opacity-10 px-5 rounded-[14px]"
         v-html="trash"
-        @click="deleteTransaction"
+        @click="deleteTransaction(transaction)"
       ></button>
       <button
         class="border-[1px] border-primary-paket rounded-[14px] grow py-4 font-bold text-primary-paket flex justify-center items-center gap-2"
@@ -107,35 +107,6 @@ export default {
       isLoading: false,
     }
   },
-  methods: {
-    async deleteTransaction() {
-      if (confirm('آیا از حذف این تراکنش مطمئن هستید؟')) {
-        try {
-          this.isLoading = true
-          await this.$store.dispatch('transaction/delete', this.transaction.id)
-          await this.$store.dispatch('bank/updateBankTotal', {
-            bank: this.bank,
-            amount: this.transaction.amount,
-            isDelete: true,
-          })
-          this.isLoading = false
-
-          this.$toast.success('تراکنش با موفقیت حذف شد!', {
-            theme: 'toasted-primary',
-            position: 'top-center',
-            duration: 3000,
-          })
-
-          this.$router.go(this.$router.currentRoute)
-        } catch (e) {
-          this.$toast.error(e, {
-            theme: 'toasted-primary',
-            position: 'top-center',
-            duration: 3000,
-          })
-        }
-      }
-    },
-  },
+  inject: ['deleteTransaction'],
 }
 </script>
