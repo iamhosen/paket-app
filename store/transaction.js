@@ -6,7 +6,9 @@ export const getters = {
     transactions: state => state.transactions,
 
     getTransactionById: (state) => (id) => state.transactions.find(transaction => transaction.id == id),
-    getTransactionByBankId: (state) => (id) => state.transactions.filter(transaction => transaction.bank_id == id)
+    getTransactionByBankId: (state) => (id) => state.transactions.filter(transaction => transaction.bank_id == id),
+    getTransactionByCategoryId: (state) => (id) => state.transactions.filter(transaction => transaction.category_id == id),
+    getTransactionByTagId: (state) => (id) => state.transactions.filter(transaction => transaction.tag_id == id)
 }
 
 export const mutations = {

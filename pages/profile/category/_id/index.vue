@@ -28,114 +28,105 @@
                 دریافتی
               </h4>
               <h4 v-else class="text-xs">پرداختی</h4>
-              <span class="text-lg font-bold">۷۷,۳۴۵,۶۷۸ </span>
+              <span class="text-lg font-bold">{{ numberFormat(sum) }} </span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="day">
-        <header
-          class="flex justify-between px-4 py-[10px] text-[14px] border-b-[1px] border-[#3C3C43]"
-        >
-          <h3 class="font-bold">شنبه ۲۷ فروردین</h3>
-          <span class="opacity-60">۷۷,۳۴۵,۶۷۸</span>
-        </header>
-
-        <div class="transactions p-4 flex flex-col gap-3">
-          <div
-            class="transaction p-4 bg-box-paket rounded-[13px] flex gap-3 items-start"
-            @click="open"
-          >
-            <div
-              class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-              v-html="back"
-            ></div>
-
-            <div class="grow flex justify-between items-center">
-              <div class="flex flex-col gap-1">
-                <h1 class="text-base">خوراکی</h1>
-                <p class="text-xs opacity-30">بلوبانک | توضیحات اضافی...</p>
-              </div>
-              <span>۷۷,۳۴۵,۶۷۸</span>
-            </div>
-          </div>
-          <div
-            class="transaction p-4 bg-box-paket rounded-[13px] flex gap-3 items-start"
-          >
-            <div
-              class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-              v-html="back"
-            ></div>
-
-            <div class="grow flex justify-between items-center">
-              <div class="flex flex-col gap-1">
-                <h1 class="text-base">خوراکی</h1>
-                <p class="text-xs opacity-30">بلوبانک | توضیحات اضافی...</p>
-              </div>
-              <span>۷۷,۳۴۵,۶۷۸</span>
-            </div>
-          </div>
-          <div
-            class="transaction p-4 bg-box-paket rounded-[13px] flex gap-3 items-start"
-          >
-            <div
-              class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-              v-html="back"
-            ></div>
-
-            <div class="grow flex justify-between items-center">
-              <div class="flex flex-col gap-1">
-                <h1 class="text-base">خوراکی</h1>
-                <p class="text-xs opacity-30">بلوبانک | توضیحات اضافی...</p>
-              </div>
-              <span>۷۷,۳۴۵,۶۷۸</span>
-            </div>
-          </div>
-        </div>
+      <div v-if="!transactions.length" class="m-4">
+        تاکنون تراکنشی در این دسته ثبت نشده است
       </div>
+      <transaction-list :days="days" v-else></transaction-list>
     </div>
-
-    <transaction ref="swipeableBottomSheet"> </transaction>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Transaction from '@/components/Transaction.vue'
-import { back, arrow } from '@/assets/icons.js'
+import { arrow } from '@/assets/icons.js'
+import { numberFormat } from '@/helpers/number.js'
 import TheHeader from '@/components/ui/TheHeader.vue'
+import TransactionList from '@/components/TransactionList.vue'
 import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 
 export default {
   components: {
-    Transaction,
     TheHeader,
     loadingSpinner,
+    TransactionList,
   },
   data() {
     return {
-      back,
       arrow,
-
       isLoading: false,
     }
   },
   computed: {
+    ...mapGetters('transaction', ['getTransactionByCategoryId']),
     ...mapGetters('category', ['getCategoryById']),
     ...mapGetters('category', ['categories']),
     category() {
       return this.getCategoryById(this.$route.params.id)
     },
+    transactions() {
+      return this.getTransactionByCategoryId(this.category.id)
+    },
+    days() {
+      const days = []
+
+      // Loop over all transactions and group them by day
+      this.transactions.forEach((transaction) => {
+        const date = new Date(transaction.date)
+        const dayTitle = `${date.getFullYear()}/${
+          date.getMonth() + 1
+        }/${date.getDate()}`
+
+        // Check if there's already a day object for this day
+        let day = days.find((d) => d.title === dayTitle)
+        if (!day) {
+          // If not, create a new day object
+          day = {
+            title: dayTitle,
+            sum: 0,
+            transactions: [],
+          }
+          days.push(day)
+        }
+
+        // Add the transaction to the day object
+        day.sum += transaction.amount // Assuming there's an amount property on each transaction
+        day.transactions.push(transaction)
+        day.transactions.sort((a, b) => {
+          return new Date(b.date) - new Date(a.date)
+        })
+      })
+
+      days.sort((a, b) => {
+        const aDate = new Date(
+          a.title.replace(/(\d{4})\/(\d{2})\/(\d{2})/, '$1-$2-$3')
+        )
+        const bDate = new Date(
+          b.title.replace(/(\d{4})\/(\d{2})\/(\d{2})/, '$1-$2-$3')
+        )
+        const now = new Date()
+        const aDiff = Math.abs(now - aDate)
+        const bDiff = Math.abs(now - bDate)
+        return aDiff - bDiff
+      })
+
+      return days
+    },
+    sum() {
+      return this.transactions.reduce(
+        (acc, transaction) => acc + transaction.amount,
+        0
+      )
+    },
   },
+
   methods: {
-    openTransaction(transaction) {
-      this.selectedTransaction = transaction
-      this.$refs.swipeableBottomSheet.setState('open')
-    },
-    open() {
-      this.$refs.swipeableBottomSheet.setState('open')
-    },
+    numberFormat,
   },
 
   async fetch() {

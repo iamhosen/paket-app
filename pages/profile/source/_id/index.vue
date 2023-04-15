@@ -77,8 +77,8 @@ import { mapGetters } from 'vuex'
 import { back, arrow } from '@/assets/icons.js'
 import { numberFormat } from '@/helpers/number.js'
 import TheHeader from '@/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 import TransactionList from '@/components/TransactionList.vue'
+import loadingSpinner from '@/components/ui/loadingSpinner.vue'
 
 export default {
   components: {
