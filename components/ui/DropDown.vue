@@ -145,6 +145,10 @@ export default {
       type: Array,
       required: true,
     },
+    default: {
+      type: Number,
+      default: null,
+    },
   },
 
   methods: {
@@ -160,6 +164,12 @@ export default {
       this.toggle()
       this.$emit('selected', this.selected)
     },
+  },
+
+  mounted() {
+    if (this.default) {
+      this.selected = this.items.find((item) => item.id == this.default)
+    }
   },
 }
 </script>

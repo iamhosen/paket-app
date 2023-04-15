@@ -11,7 +11,8 @@
     </header>
     <div class="px-4 mb-5">
       <div class="flex justify-between gap-4 mb-5">
-        <div
+        <nuxt-link
+          :to="`/profile/source/${bank.id}`"
           class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
         >
           <div
@@ -22,8 +23,9 @@
             <h4 class="text-xs opacity-30">منبع</h4>
             <span class="text-lg">{{ bank.name }} </span>
           </div>
-        </div>
-        <div
+        </nuxt-link>
+        <nuxt-link
+          :to="`/profile/category/${category.id}`"
           class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
         >
           <div
@@ -34,7 +36,7 @@
             <h4 class="text-xs opacity-30">دسته</h4>
             <span class="text-lg">{{ category.name }}</span>
           </div>
-        </div>
+        </nuxt-link>
       </div>
 
       <div
@@ -59,12 +61,13 @@
         v-html="trash"
         @click="deleteTransaction(transaction)"
       ></button>
-      <button
+      <nuxt-link
+        :to="`/transaction/${transaction.id}/edit`"
         class="border-[1px] border-primary-paket rounded-[14px] grow py-4 font-bold text-primary-paket flex justify-center items-center gap-2"
       >
         <span v-html="editOrange" class="fill-primary-paket"></span>
         ویرایش
-      </button>
+      </nuxt-link>
     </div>
   </div>
 </template>
