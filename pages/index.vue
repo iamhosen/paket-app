@@ -16,20 +16,24 @@
       ></card-stack>
     </div>
     <home-tabs></home-tabs>
-    <home-analysis></home-analysis>
+    <!-- <home-analysis></home-analysis> -->
   </div>
 </template>
 
 <script>
-import CardStack from '@/components/slider/CardStack.vue'
-import HomeTabs from '@/components/HomeTabs.vue'
-import HomeAnalysis from '../components/HomeAnalysis.vue'
-
 import { paket } from '@/assets/icons.js'
+import HomeTabs from '@/components/HomeTabs.vue'
+import CardStack from '@/components/slider/CardStack.vue'
+// import HomeAnalysis from '../components/HomeAnalysis.vue'
 
 export default {
   name: 'HomePage',
-  components: { CardStack, HomeTabs, HomeAnalysis },
+
+  components: {
+    HomeTabs,
+    CardStack,
+    // HomeAnalysis
+  },
 
   data() {
     return {
@@ -38,46 +42,41 @@ export default {
         {
           id: 0,
           bank: 'SAMAN',
-          title: 'بانک سامان',
-          cardNumber: '6219 8619 6169 3270',
-          total: 14800500,
-          color: '#0075BC',
+          name: 'بانک سامان',
+          card_number: '6219 8619 6169 3270',
+          total_amount: 14800500,
         },
         {
           id: 1,
-          bank: 'BLUBANK',
-          title: 'بلوبانک',
-          cardNumber: '6219 8619 6169 3270',
-          total: 14480000,
-          color: '#CD323C',
+          name: 'بلوبانک',
+          card_number: '6219 8619 6169 3270',
+          total_amount: 14480000,
         },
         {
           id: 2,
-          bank: 'SADERAT',
-          title: 'بانک صادرات',
-          cardNumber: '6219 8619 6169 3270',
-          total: 12480000,
-          color: '#00006F',
+          name: 'بانک صادرات',
+          card_number: '6219 8619 6169 3270',
+          total_amount: 12480000,
         },
         {
-          id: 3,
-          bank: 'PASARGAD',
-          title: 'بانک پاسارگاد',
-          cardNumber: '6219 8619 6169 3270',
-          total: 148000330,
-          color: '#F3B23E',
+          id: 25,
+          name: 'نقدی',
+          card_number: null,
+          total_amount: 10000,
         },
       ],
     }
   },
 
+  computed: {
+    sources() {
+      return this.$store.getters['bank/banks']
+    },
+  },
+
   methods: {
-    handleCardAccepted() {
-      // console.log('handleCardAccepted')
-    },
-    handleCardRejected() {
-      // console.log('handleCardRejected')
-    },
+    handleCardAccepted() {},
+    handleCardRejected() {},
     removeCardFromDeck() {
       const holder = this.visibleCards[0]
 
@@ -87,6 +86,19 @@ export default {
         this.visibleCards.push(holder)
       }, 500)
     },
+  },
+  async fetch() {
+    try {
+      this.isLoading = true
+      await this.$store.dispatch('loadUserData')
+      this.isLoading = false
+    } catch (err) {
+      this.$toast.error(err, {
+        theme: 'toasted-primary',
+        position: 'top-center',
+        duration: 10000,
+      })
+    }
   },
 }
 </script>
