@@ -11,7 +11,7 @@
         }"
         @click="$emit('monthChanged', index)"
       >
-        {{ month }}
+        {{ month.title }}
       </span>
     </nav>
   </header>
