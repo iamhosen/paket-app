@@ -68,7 +68,8 @@ export const actions = {
         const transactions = rootGetters['transaction/getTransactionByBankId'](bankId)
 
         //total amount of transactions
-        const total = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+        let total = transactions.reduce((acc, transaction) => acc + transaction.amount, 0);
+        total += bank.initial_amount
 
         const { data, error } = await this.$supabase
             .from('Banks')

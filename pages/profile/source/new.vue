@@ -158,6 +158,7 @@ export default {
           name: this.bank.title,
           entity_type: this.type,
           total_amount: this.total,
+          initial_amount: this.total,
           card_number: this.cardNumber,
           description: this.description,
         }
@@ -167,6 +168,7 @@ export default {
           name: 'نقدی',
           entity_type: this.type,
           total_amount: this.total,
+          initial_amount: this.total,
           description: this.description,
         }
       }

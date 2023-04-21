@@ -56,7 +56,7 @@
         </div>
 
         <div class="bg-[#1F1F1F] flex justify-between p-4 rounded-xl mb-8">
-          <label class="opacity-50">موجودی</label>
+          <label class="opacity-50">موجودی اولیه</label>
           <div class="flex gap-2 grow">
             <input
               class="focus:outline-none bg-transparent text-left grow"
@@ -64,7 +64,7 @@
               required
               inputmode="numeric"
               disabled
-              v-model="bank.total_amount"
+              v-model="bank.initial_amount"
             />
             <span class="opacity-50">ریال</span>
           </div>
