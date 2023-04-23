@@ -69,6 +69,8 @@
         ویرایش
       </nuxt-link>
     </div>
+
+    <pre class="text-[12px] opacity-40 p-4">{{ transaction.sms }}</pre>
   </div>
 </template>
 

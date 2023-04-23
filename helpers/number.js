@@ -17,3 +17,31 @@ export const toPersianNumberFormat = (number) => {
     return toPersianNumber(numberFormat(number))
 }
 
+export const toEnglishNumberInString = (string) => {
+    const persianDigits = {
+        '۰': '0',
+        '۱': '1',
+        '۲': '2',
+        '۳': '3',
+        '۴': '4',
+        '۵': '5',
+        '۶': '6',
+        '۷': '7',
+        '۸': '8',
+        '۹': '9'
+    };
+
+    let result = '';
+
+    for (let i = 0; i < string.length; i++) {
+        const char = string[i];
+        if (char in persianDigits) {
+            result += persianDigits[char];
+        } else {
+            result += char;
+        }
+    }
+
+    return result;
+}
+

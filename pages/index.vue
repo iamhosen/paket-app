@@ -3,10 +3,9 @@
     <div
       class="absolute mt-[-1em] t-0 w-full max-w-[500px] h-40 bg-[#282828] -z-10"
     ></div>
-    <div
-      class="w-full flex justify-center items-center h-10 mb-6"
-      v-html="paket"
-    ></div>
+
+    <the-header title="logo" :alert="true"></the-header>
+
     <div class="w-full h-64 mb-2">
       <card-stack
         :cards="visibleCards"
@@ -24,6 +23,7 @@
 import { paket } from '@/assets/icons.js'
 import HomeTabs from '@/components/HomeTabs.vue'
 import CardStack from '@/components/slider/CardStack.vue'
+import TheHeader from '../components/ui/TheHeader.vue'
 // import HomeAnalysis from '../components/HomeAnalysis.vue'
 
 export default {
@@ -32,6 +32,7 @@ export default {
   components: {
     HomeTabs,
     CardStack,
+    TheHeader,
     // HomeAnalysis
   },
 

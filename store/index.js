@@ -16,5 +16,8 @@ export const actions = {
         //load banks
         if (!state.bank.banks?.length)
             await dispatch('bank/fetchBanks')
+
+        if (!state.notification.notifications?.length)
+            await dispatch('notification/fetchNotifications')
     }
 }

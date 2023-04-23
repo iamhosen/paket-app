@@ -5,7 +5,9 @@ export const state = () => ({
 export const getters = {
     banks: state => state.banks,
 
-    getBankById: (state) => (id) => state.banks.find(bank => bank.id == id)
+    getBankById: (state) => (id) => state.banks.find(bank => bank.id == id),
+    getBankByName: (state) => (name) => state.banks.find(bank => bank.name == name)
+
 }
 
 export const mutations = {
