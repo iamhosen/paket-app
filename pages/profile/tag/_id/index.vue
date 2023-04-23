@@ -110,16 +110,13 @@ export default {
       })
 
       days.sort((a, b) => {
-        const aDate = new Date(
-          a.title.replace(/(\d{4})\/(\d{2})\/(\d{2})/, '$1-$2-$3')
-        )
-        const bDate = new Date(
-          b.title.replace(/(\d{4})\/(\d{2})\/(\d{2})/, '$1-$2-$3')
-        )
-        const now = new Date()
-        const aDiff = Math.abs(now - aDate)
-        const bDiff = Math.abs(now - bDate)
-        return aDiff - bDiff
+        const [aYear, aMonth, aDay] = a.title.split('/')
+        const [bYear, bMonth, bDay] = b.title.split('/')
+
+        if (aYear !== bYear) return aYear > bYear ? -1 : 1
+        else if (aMonth !== bMonth) return aMonth > bMonth ? -1 : 1
+        else if (aDay !== bDay) return aDay > bDay ? -1 : 1
+        else return 0
       })
 
       return days
