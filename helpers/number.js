@@ -3,6 +3,12 @@ export const toPersianNumber = (number) => {
     return number.toString().replace(/\d/g, (match) => persianDigits[parseInt(match)]);
 }
 
+export const toEnglishNumber = (str) => {
+    return parseFloat(str
+        .replace(/[۰۱۲۳۴۵۶۷۸۹]/g, function (d) { return d.charCodeAt(0) - 1776; }) // Convert Persian numbers
+    ) * 1;
+}
+
 export const numberFormat = (number) => {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

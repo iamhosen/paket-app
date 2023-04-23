@@ -39,6 +39,12 @@
     box-sizing: border-box;
 }
 
+html {
+    touch-action: pan-x pan-y;
+    touch-zooming: none;
+    user-zoom: fixed;
+}
+
 body {
     max-width: 500px;
     margin-left: auto;

@@ -12,6 +12,7 @@
           { id: 'withdraw', title: 'پرداختی' },
           { id: 'transition', title: 'جیب به جیب', color: '#007AFF' },
         ]"
+        value="withdraw"
         @changeTab="changeTab"
       ></picker>
 
@@ -23,8 +24,7 @@
           <label class="opacity-50" for="total">مبلغ</label>
           <div class="flex gap-2 grow">
             <input
-              v-model="total"
-              type="number"
+              v-model="inputTotal"
               name="total"
               id="total"
               class="ltr focus:outline-none bg-transparent text-left grow"
@@ -134,20 +134,22 @@
 </template>
 
 <script>
-import VuePersianDatetimePicker from 'vue-persian-datetime-picker'
-import TheHeader from '@/components/ui/TheHeader.vue'
-import DropDown from '@/components/ui/DropDown.vue'
 import Picker from '@/components/ui/Picker.vue'
+import DropDown from '@/components/ui/DropDown.vue'
+import TheHeader from '@/components/ui/TheHeader.vue'
 import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import VuePersianDatetimePicker from 'vue-persian-datetime-picker'
+import { numberFormat, toEnglishNumber } from '@/helpers/number'
 
 export default {
   layout: 'add',
+
   components: {
-    datePicker: VuePersianDatetimePicker,
-    TheHeader,
-    DropDown,
     Picker,
+    DropDown,
+    TheHeader,
     loadingSpinner,
+    datePicker: VuePersianDatetimePicker,
   },
 
   data() {
@@ -155,6 +157,7 @@ export default {
       isLoading: false,
 
       type: 'deposit',
+
       total: null,
       date: '',
       description: '',
@@ -176,6 +179,27 @@ export default {
         this.type = newValue
       },
     },
+
+    inputTotal: {
+      get() {
+        return numberFormat(this.total ?? 0)
+      },
+      set(newValue) {
+        newValue = newValue.split(',').join('')
+
+        //contains persian numbers
+        if (/[\u06F0-\u06F9]/.test(newValue)) {
+          newValue = toEnglishNumber(newValue)
+        }
+
+        //contains non numeric characters
+        if (!/^\d+$/.test(newValue)) {
+          newValue = '0'
+        }
+        this.total = newValue
+      },
+    },
+
     withdraws() {
       const withdraws = this.$store.getters['category/withdraws']
       return withdraws.map((withdraw) => {
@@ -238,7 +262,6 @@ export default {
         this.doTransaction()
       }
     },
-
     async doTransaction() {
       let transaction = {
         user_id: this.$store.getters['auth/user'].id,
@@ -321,6 +344,9 @@ export default {
         })
       }
     },
+
+    numberFormat,
+    toEnglishNumber,
   },
 
   async fetch() {
