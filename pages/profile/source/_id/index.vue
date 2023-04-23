@@ -111,10 +111,7 @@ export default {
 
       // Loop over all transactions and group them by day
       this.transactions.forEach((transaction) => {
-        const date = new Date(transaction.date)
-        const dayTitle = `${date.getFullYear()}/${
-          date.getMonth() + 1
-        }/${date.getDate()}`
+        const dayTitle = transaction.date.split(' ')[0]
 
         // Check if there's already a day object for this day
         let day = days.find((d) => d.title === dayTitle)
@@ -129,8 +126,10 @@ export default {
         }
 
         // Add the transaction to the day object
-        day.sum += transaction.amount // Assuming there's an amount property on each transaction
         day.transactions.push(transaction)
+        // Update the sum of the day
+        day.sum += transaction.amount
+        // Sort transactions by date
         day.transactions.sort((a, b) => {
           return new Date(b.date) - new Date(a.date)
         })
