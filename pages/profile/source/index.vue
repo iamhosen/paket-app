@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header title="منابع خرج" add="/profile/source/new"></the-header>
+    <BaseHeader title="منابع خرج" add="/profile/source/new"></BaseHeader>
 
     <!-- cards -->
     <div v-if="isLoading" class="flex justify-center items-center h-48">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import BankCard from '@/components/Setting/BankCard.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 

@@ -4,11 +4,11 @@
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
-      <the-header
+      <BaseHeader
         title="ویرایش تراکنش"
         :trash="true"
         @delete="deleteTransaction"
-      ></the-header>
+      ></BaseHeader>
 
       <!-- <picker
         :value="type == 'deposit' ? 'deposit' : 'withdraw'"
@@ -96,7 +96,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import TheHeader from '~/components/Base/TheHeader.vue'
+import TheHeader from '~/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import Picker from '@/components/Base/Picker.vue'
 import DropDown from '@/components/Base/DropDown.vue'

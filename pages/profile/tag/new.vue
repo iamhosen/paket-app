@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header title="برچسب جدید"></the-header>
+    <BaseHeader title="برچسب جدید"></BaseHeader>
 
     <form @submit.prevent="createTag" class="px-4">
       <div class="bg-[#1F1F1F] flex justify-between p-4 rounded-xl mb-4">
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import TheHeader from '~/components/Base/TheHeader.vue'
+import TheHeader from '~/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {

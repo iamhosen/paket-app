@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header title="منبع جدید"></the-header>
+    <BaseHeader title="منبع جدید"></BaseHeader>
 
     <form @submit.prevent="createBank" class="px-4">
       <div
@@ -95,7 +95,7 @@
 </template>
 
 <script>
-import TheHeader from '~/components/Base/TheHeader.vue'
+import TheHeader from '~/components/Base/Header.vue'
 import DropDown from '~/components/Base/DropDown.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 

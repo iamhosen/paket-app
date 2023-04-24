@@ -1,6 +1,6 @@
 <template>
   <div class="mb-32">
-    <the-header title="تراکنش جدید" />
+    <BaseHeader title="تراکنش جدید" />
 
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
@@ -136,7 +136,7 @@
 <script>
 import Picker from '@/components/Base/Picker.vue'
 import DropDown from '@/components/Base/DropDown.vue'
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker'
 import { numberFormat, toEnglishNumber } from '@/helpers/number'

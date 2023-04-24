@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header title="برچسب ها" add="/profile/tag/new"></the-header>
+    <BaseHeader title="برچسب ها" add="/profile/tag/new"></BaseHeader>
 
     <!-- items -->
     <div v-if="isLoading" class="flex justify-center items-center h-48">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import SettingTag from '@/components/Setting/Tag.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 

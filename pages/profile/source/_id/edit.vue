@@ -4,11 +4,11 @@
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
-      <the-header
+      <BaseHeader
         title="ویرایش منبع"
         :trash="true"
         @delete="deleteBank"
-      ></the-header>
+      ></BaseHeader>
 
       <form @submit.prevent="editBank" class="px-4">
         <div
@@ -108,7 +108,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import DropDown from '~/components/Base/DropDown.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 

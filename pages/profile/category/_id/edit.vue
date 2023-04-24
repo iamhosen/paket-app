@@ -4,11 +4,11 @@
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
-      <the-header
+      <BaseHeader
         title="ویرایش دسته"
         :trash="true"
         @delete="deleteCategory"
-      ></the-header>
+      ></BaseHeader>
 
       <form @submit.prevent="editCategory" class="px-4">
         <div class="bg-[#1F1F1F] flex justify-between p-4 rounded-xl mb-4">
@@ -36,7 +36,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import TheHeader from '~/components/Base/TheHeader.vue'
+import TheHeader from '~/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {

@@ -4,10 +4,10 @@
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
-      <the-header
+      <BaseHeader
         :title="tag.title"
         :edit="`/profile/tag/${$route.params.id}/edit`"
-      ></the-header>
+      ></BaseHeader>
 
       <div class="flex flex-col gap-4 bg-[#282828] px-4 py-5 mb-5">
         <div class="flex justify-between gap-2">
@@ -54,7 +54,7 @@
 import { mapGetters } from 'vuex'
 import { back, arrow } from '@/assets/icons.js'
 import { numberFormat } from '@/helpers/number.js'
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {

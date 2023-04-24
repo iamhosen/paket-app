@@ -1,6 +1,6 @@
 <template>
   <div class="mb-32">
-    <the-header
+    <BaseHeader
       title="تراکنش پیامکی"
       :trash="true"
       @delete="deleteNotification"
@@ -144,7 +144,7 @@
 import { mapGetters } from 'vuex'
 import Picker from '@/components/Base/Picker.vue'
 import DropDown from '@/components/Base/DropDown.vue'
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import { numberFormat, toEnglishNumber } from '@/helpers/number'
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker'

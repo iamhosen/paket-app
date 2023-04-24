@@ -1,6 +1,6 @@
 <template>
   <div>
-    <the-header title="پیامک های بانکی"></the-header>
+    <BaseHeader title="پیامک های بانکی"></BaseHeader>
 
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import TheHeader from '@/components/Base/TheHeader.vue'
+import TheHeader from '@/components/Base/Header.vue'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import Notification from '@/components/Setting/Notification.vue'
 

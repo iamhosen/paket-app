@@ -1,41 +1,25 @@
 <template>
   <div>
-    <div
+    <!-- <div
       class="absolute mt-[-1em] t-0 w-full max-w-[500px] h-40 bg-[#282828] -z-10"
-    ></div>
+    ></div> -->
 
-    <the-header title="logo" :alert="true"></the-header>
+    <BaseHeader title="logo" :alert="true"></BaseHeader>
 
     <div class="w-full h-64 mb-2">
-      <card-stack
+      <SliderCardStack
         :cards="visibleCards"
-        @cardAccepted="handleCardAccepted"
-        @cardRejected="handleCardRejected"
         @hideCard="removeCardFromDeck"
-      ></card-stack>
+      ></SliderCardStack>
     </div>
-    <home-tabs></home-tabs>
-    <!-- <home-analysis></home-analysis> -->
+    <HomeTabs></HomeTabs>
   </div>
 </template>
 
 <script>
 import { paket } from '@/assets/icons.js'
-import HomeTabs from '@/components/HomeTabs.vue'
-import CardStack from '@/components/Slider/CardStack.vue'
-import TheHeader from '../components/Base/TheHeader.vue'
-// import HomeAnalysis from '../components/HomeAnalysis.vue'
 
 export default {
-  name: 'HomePage',
-
-  components: {
-    HomeTabs,
-    CardStack,
-    TheHeader,
-    // HomeAnalysis
-  },
-
   data() {
     return {
       paket,
@@ -76,8 +60,6 @@ export default {
   },
 
   methods: {
-    handleCardAccepted() {},
-    handleCardRejected() {},
     removeCardFromDeck() {
       const holder = this.visibleCards[0]
 
@@ -88,6 +70,7 @@ export default {
       }, 500)
     },
   },
+
   async fetch() {
     try {
       this.isLoading = true
