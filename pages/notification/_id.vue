@@ -429,7 +429,6 @@ export default {
 
 .vpd-next svg path,
 .vpd-prev svg path {
-  // color: white;
   fill: white;
 }
 

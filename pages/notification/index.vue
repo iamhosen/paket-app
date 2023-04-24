@@ -3,39 +3,32 @@
     <BaseHeader title="پیامک های بانکی"></BaseHeader>
 
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
+      <BaseLoadingSpinner class="h-16 w-16"></BaseLoadingSpinner>
     </div>
     <div v-else class="px-4 flex flex-col gap-4">
-      <Notification
+      <SettingNotification
         v-for="notification in notifications"
         :key="notification.id"
         :notification="notification"
-      ></Notification>
+      ></SettingNotification>
     </div>
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/Base/Header.vue'
-import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
-import Notification from '@/components/Setting/Notification.vue'
-
 export default {
-  components: {
-    TheHeader,
-    LoadingSpinner,
-    Notification,
-  },
   data() {
     return {
       isLoading: false,
     }
   },
+
   computed: {
     notifications() {
       return this.$store.getters['notification/notifications']
     },
   },
+
   async fetch() {
     try {
       this.isLoading = true
