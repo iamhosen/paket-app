@@ -77,3 +77,14 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
     -moz-appearance: textfield;
 }
+
+.paket-form__input:-webkit-autofill,
+.paket-form__input:-webkit-autofill:hover,
+.paket-form__input:-webkit-autofill:focus,
+.paket-form__input:-webkit-autofill:active {
+    -webkit-text-fill-color: white !important;
+    background-clip: content-box !important;
+    -webkit-box-shadow: 0 0 0 30px #1c1c1e inset !important;
+    box-shadow: 0 0 0px 1000px #1c1c1e inset !important;
+    background-color: #1c1c1e !important;
+}

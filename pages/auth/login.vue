@@ -55,7 +55,6 @@
 <script>
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 export default {
-  name: 'LoginPage',
   layout: 'auth',
   middleware: ['auth'],
 
@@ -66,8 +65,17 @@ export default {
     return {
       email: '',
       password: '',
-      isLoading: false,
     }
+  },
+  computed: {
+    isLoading: {
+      get() {
+        return this.$store.state.isLoading
+      },
+      set(newValue) {
+        this.$store.commit('setLoading', newValue)
+      },
+    },
   },
   methods: {
     async login() {
@@ -79,16 +87,17 @@ export default {
       }
 
       try {
-        await this.$store.dispatch('auth/login', user)
-
-        this.$router.push('/')
-        this.$toast.show('با موفقیت وارد شدید!', {
-          theme: 'toasted-primary',
-          position: 'top-center',
-          duration: 3000,
-        })
+        await this.$store
+          .dispatch('auth/login', user)
+          .then(() => this.$router.push('/'))
+          .then(() =>
+            this.$toast.show('با موفقیت وارد شدید!', {
+              theme: 'toasted-primary',
+              position: 'top-center',
+              duration: 3000,
+            })
+          )
       } catch (err) {
-        console.log(err)
         this.$toast.error(err, {
           theme: 'toasted-primary',
           position: 'top-center',
@@ -101,20 +110,3 @@ export default {
   },
 }
 </script>
-
-<style lang="scss">
-.paket-form {
-  &__input {
-    &:-webkit-autofill,
-    &:-webkit-autofill:hover,
-    &:-webkit-autofill:focus,
-    &:-webkit-autofill:active {
-      -webkit-text-fill-color: white !important;
-      background-clip: content-box !important;
-      -webkit-box-shadow: 0 0 0 30px #1c1c1e inset !important;
-      box-shadow: 0 0 0px 1000px #1c1c1e inset !important;
-      background-color: #1c1c1e !important;
-    }
-  }
-}
-</style>

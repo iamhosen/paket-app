@@ -1,6 +1,12 @@
 export const state = () => ({
-
+    isLoading: false
 })
+
+export const mutations = {
+    setLoading(state, loading) {
+        state.isLoading = loading
+    },
+}
 
 export const actions = {
     async loadUserData({ state, dispatch }) {
