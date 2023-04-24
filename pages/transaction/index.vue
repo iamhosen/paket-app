@@ -4,13 +4,13 @@
       <h1 class="text-2xl font-bold">تراکنش ها</h1>
     </div>
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else-if="months.length == 0" class="mx-4">
       تراکنشی تا کنون ثبت نشده است
     </div>
     <div v-else>
-      <month-selector
+      <TransactionMonthTabs
         :months="months"
         :selectedMonth="selectedMonth"
         @monthChanged="updateSelectedMonth"
@@ -66,24 +66,20 @@
         </div>
       </div>
 
-      <transaction-list :days="getMonth(selectedMonth).days"></transaction-list>
+      <TransactionList :days="getMonth(selectedMonth).days"></TransactionList>
     </div>
   </div>
 </template>
 
 <script>
-import MonthSelector from '@/components/MonthSelector.vue'
-import TransactionListMonth from '@/components/TransactionListMonth.vue'
 import { getPersianMonthName } from '@/helpers/helper.js'
 import { arrow } from '@/assets/icons.js'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import { numberFormat } from '@/helpers/number.js'
 
 export default {
   components: {
-    MonthSelector,
-    TransactionListMonth,
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {

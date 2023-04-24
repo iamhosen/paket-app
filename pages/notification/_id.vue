@@ -7,7 +7,7 @@
     />
 
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
       <picker
@@ -142,10 +142,10 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import Picker from '@/components/ui/Picker.vue'
-import DropDown from '@/components/ui/DropDown.vue'
-import TheHeader from '@/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import Picker from '@/components/Base/Picker.vue'
+import DropDown from '@/components/Base/DropDown.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 import { numberFormat, toEnglishNumber } from '@/helpers/number'
 import VuePersianDatetimePicker from 'vue-persian-datetime-picker'
 
@@ -156,7 +156,7 @@ export default {
     Picker,
     DropDown,
     TheHeader,
-    loadingSpinner,
+    LoadingSpinner,
     datePicker: VuePersianDatetimePicker,
   },
 

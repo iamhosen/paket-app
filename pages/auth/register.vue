@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   name: 'LoginPage',
@@ -70,7 +70,7 @@ export default {
   middleware: ['auth'],
 
   components: {
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {

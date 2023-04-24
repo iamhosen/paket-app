@@ -13,7 +13,7 @@
 </template>
   
   <script>
-import Card from '@/components/slider/Card.vue'
+import Card from '@/components/Slider/Card.vue'
 
 export default {
   components: {

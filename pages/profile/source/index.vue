@@ -4,25 +4,25 @@
 
     <!-- cards -->
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else-if="banks.length" class="mx-4 flex flex-col gap-4">
-      <bank-card v-for="bank in banks" :key="bank.id" :card="bank"></bank-card>
+      <BankCard v-for="bank in banks" :key="bank.id" :card="bank"></BankCard>
     </div>
     <div v-else>منبعی موجود نیست!</div>
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/ui/TheHeader.vue'
-import BankCard from '@/components/BankCard.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import BankCard from '@/components/Setting/BankCard.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
     BankCard,
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {

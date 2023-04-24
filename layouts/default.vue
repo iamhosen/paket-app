@@ -7,7 +7,7 @@
 
 
 <script>
-import BottomNavigation from '../components/ui/BottomNavigation.vue'
+import BottomNavigation from '../components/Base/BottomNavigation.vue'
 export default {
   name: 'default',
   components: { BottomNavigation },

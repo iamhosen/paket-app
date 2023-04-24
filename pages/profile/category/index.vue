@@ -5,7 +5,7 @@
 
     <!-- tabs -->
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
       <!-- tabs -->
@@ -23,11 +23,11 @@
         class="bg-bg-input-paket rounded-[14px] mx-4"
       >
         <div v-if="deposites.length">
-          <category-item
+          <Category
             v-for="category in deposites"
             :key="category.id"
             :category="category"
-          ></category-item>
+          ></Category>
         </div>
         <div v-else>دسته بندی دریافتی یافت نشد!</div>
       </div>
@@ -36,11 +36,11 @@
         class="bg-bg-input-paket rounded-[14px] mx-4"
       >
         <div v-if="withdraws.length">
-          <category-item
+          <Category
             v-for="category in withdraws"
             :key="category.id"
             :category="category"
-          ></category-item>
+          ></Category>
         </div>
         <div v-else>دسته بندی پرداختی یافت نشد!</div>
       </div>
@@ -49,16 +49,16 @@
 </template>
 
 <script>
-import TheHeader from '@/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
-import CategoryItem from '@/components/CategoryItem.vue'
-import Picker from '@/components/ui/Picker.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
+import Category from '@/components/Setting/Category.vue'
+import Picker from '@/components/Base/Picker.vue'
 
 export default {
   components: {
     TheHeader,
-    loadingSpinner,
-    CategoryItem,
+    LoadingSpinner,
+    Category,
     Picker,
   },
   data() {

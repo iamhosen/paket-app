@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
       <the-header
@@ -36,13 +36,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import TheHeader from '~/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '~/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {

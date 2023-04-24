@@ -3,28 +3,28 @@
     <the-header title="پیامک های بانکی"></the-header>
 
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else class="px-4 flex flex-col gap-4">
-      <notification-item
+      <Notification
         v-for="notification in notifications"
         :key="notification.id"
         :notification="notification"
-      ></notification-item>
+      ></Notification>
     </div>
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
-import NotificationItem from '@/components/NotificationItem.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
+import Notification from '@/components/Setting/Notification.vue'
 
 export default {
   components: {
     TheHeader,
-    loadingSpinner,
-    NotificationItem,
+    LoadingSpinner,
+    Notification,
   },
   data() {
     return {

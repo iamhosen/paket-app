@@ -63,13 +63,13 @@
 </template>
 
 <script>
-import TheHeader from '~/components/ui/TheHeader.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '~/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {

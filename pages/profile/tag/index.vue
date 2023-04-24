@@ -4,25 +4,25 @@
 
     <!-- items -->
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else-if="tags.length" class="bg-bg-input-paket rounded-[14px] mx-4">
-      <tag-item v-for="tag in tags" :key="tag.id" :tag="tag"></tag-item>
+      <SettingTag v-for="tag in tags" :key="tag.id" :tag="tag"></SettingTag>
     </div>
     <div v-else>برچسبی موجود نیست!</div>
   </div>
 </template>
 
 <script>
-import TheHeader from '@/components/ui/TheHeader.vue'
-import TagItem from '@/components/TagItem.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import SettingTag from '@/components/Setting/Tag.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
-    TagItem,
-    loadingSpinner,
+    SettingTag,
+    LoadingSpinner,
   },
 
   data() {

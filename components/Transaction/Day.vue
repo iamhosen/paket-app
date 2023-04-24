@@ -8,24 +8,20 @@
     </header>
 
     <div class="transactions p-4 flex flex-col gap-3">
-      <transaction-item
+      <TransactionCard
         v-for="transaction in transactions"
         :key="transaction.id"
         :transaction="transaction"
         @open="$emit('open', transaction)"
-      ></transaction-item>
+      ></TransactionCard>
     </div>
   </div>
 </template>
 
 <script>
-import TransactionItem from '@/components/TransactionItem.vue'
 import { numberFormat } from '@/helpers/number.js'
 
 export default {
-  components: {
-    TransactionItem,
-  },
   props: {
     day: {
       type: Object,

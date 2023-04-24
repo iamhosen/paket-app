@@ -1,32 +1,28 @@
 <template>
   <div>
-    <transaction-list-day
+    <TransactionDay
       v-for="day in days"
       :key="day.title"
       :day="day"
       @open="open"
-    ></transaction-list-day>
+    ></TransactionDay>
 
-    <transaction ref="swipeableBottomSheet">
-      <transaction-content
+    <BottomDrawer ref="swipeableBottomSheet">
+      <TransactionDetail
         v-if="selectedTransaction"
         :transaction="selectedTransaction"
         @deleteTransaction="deleteTransaction"
-      ></transaction-content>
-    </transaction>
+      ></TransactionDetail>
+    </BottomDrawer>
   </div>
 </template>
 
 <script>
-import Transaction from '@/components/Transaction.vue'
-import TransactionContent from '@/components/TransactionContent.vue'
-import TransactionListDay from '@/components/TransactionListDay.vue'
+import BottomDrawer from '@/components/Base/BottomDrawer.vue'
 
 export default {
   components: {
-    Transaction,
-    TransactionContent,
-    TransactionListDay,
+    BottomDrawer,
   },
   data() {
     return {

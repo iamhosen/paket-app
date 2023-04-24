@@ -22,8 +22,8 @@
 <script>
 import { paket } from '@/assets/icons.js'
 import HomeTabs from '@/components/HomeTabs.vue'
-import CardStack from '@/components/slider/CardStack.vue'
-import TheHeader from '../components/ui/TheHeader.vue'
+import CardStack from '@/components/Slider/CardStack.vue'
+import TheHeader from '../components/Base/TheHeader.vue'
 // import HomeAnalysis from '../components/HomeAnalysis.vue'
 
 export default {

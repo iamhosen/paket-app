@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="isLoading" class="flex justify-center items-center h-48">
-      <loadingSpinner class="h-16 w-16"></loadingSpinner>
+      <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
     <div v-else>
       <the-header
@@ -37,7 +37,7 @@
       <div v-if="!transactions.length" class="m-4">
         تاکنون تراکنشی در این دسته ثبت نشده است
       </div>
-      <transaction-list :days="days" v-else></transaction-list>
+      <TransactionList :days="days" v-else></TransactionList>
     </div>
   </div>
 </template>
@@ -46,15 +46,13 @@
 import { mapGetters } from 'vuex'
 import { arrow } from '@/assets/icons.js'
 import { numberFormat } from '@/helpers/number.js'
-import TheHeader from '@/components/ui/TheHeader.vue'
-import TransactionList from '@/components/TransactionList.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '@/components/Base/TheHeader.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
-    loadingSpinner,
-    TransactionList,
+    LoadingSpinner,
   },
   data() {
     return {

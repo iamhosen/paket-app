@@ -95,15 +95,15 @@
 </template>
 
 <script>
-import TheHeader from '~/components/ui/TheHeader.vue'
-import DropDown from '~/components/ui/DropDown.vue'
-import loadingSpinner from '@/components/ui/loadingSpinner.vue'
+import TheHeader from '~/components/Base/TheHeader.vue'
+import DropDown from '~/components/Base/DropDown.vue'
+import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
 
 export default {
   components: {
     TheHeader,
     DropDown,
-    loadingSpinner,
+    LoadingSpinner,
   },
   data() {
     return {
