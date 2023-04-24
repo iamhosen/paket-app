@@ -18,80 +18,42 @@
     <div class="mx-4 mb-5">
       <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">تنظیمات</h3>
       <div class="bg-bg-input-paket rounded-[14px]">
-        <!-- <nuxt-link
-          to=""
-          class="flex items-center mx-4 py-3 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-        >
-          <div
-            class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="wallet"
-          ></div>
-          <span class="py-2">دفترهای خرج</span>
-        </nuxt-link> -->
-        <nuxt-link
-          to="/profile/source"
-          class="flex items-center mx-4 py-3 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-        >
-          <div
-            class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="source"
-          ></div>
-          <span class="py-2">منابع خرج</span>
-        </nuxt-link>
-        <nuxt-link
+        <SettingButton to="/" title="دفترهای خرج" :icon="wallet" />
+        <SettingButton to="/profile/source" title="منابع خرج" :icon="source" />
+        <SettingButton
           to="/profile/category"
-          class="flex items-center mx-4 py-3 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-        >
-          <div
-            class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="category"
-          ></div>
-          <span class="py-2"> دسته بندی ها</span>
-        </nuxt-link>
-        <nuxt-link to="/profile/tag" class="flex items-center mx-4 py-3 gap-4">
-          <div
-            class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="tag"
-          ></div>
-          <span class="py-2"> برچسب ها</span>
-        </nuxt-link>
+          title="دسته بندی ها"
+          :icon="category"
+        />
+        <SettingButton to="/profile/tag" title="برچسب ها" :icon="tag" />
       </div>
     </div>
 
-    <div class="mx-4 mb-5 hidden">
+    <!-- <div class="mx-4 mb-5">
       <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">
         اطلاعات کاربری
       </h3>
       <div class="bg-bg-input-paket rounded-[14px]">
-        <nuxt-link
-          to=""
-          class="flex items-center mx-4 py-3 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-        >
-          <div
-            class="bg-[#FF453A] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="edit"
-          ></div>
-          <span class="py-2">ویرایش اطلاعات کاربری</span>
-        </nuxt-link>
-        <nuxt-link
-          to=""
-          class="flex items-center mx-4 py-3 gap-4 border-b-[.5px] border-[#545458] border-opacity-60"
-        >
-          <div
-            class="bg-[#FF453A] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="lock"
-          ></div>
-          <span class="py-2">تغییر رمزعبور </span>
-        </nuxt-link>
-        <nuxt-link to="" class="flex items-center mx-4 py-3 gap-4">
-          <div
-            class="bg-[#FF453A] w-8 h-8 flex justify-center items-center rounded-lg"
-            v-html="backup"
-          ></div>
-          <span class="py-2">انتقال اطلاعات </span>
-        </nuxt-link>
+        <SettingButton
+          to="/"
+          title="ویرایش اطلاعات کاربری"
+          color="#FF453A"
+          :icon="edit"
+        />
+        <SettingButton
+          to="/"
+          title="تغییر رمزعبور"
+          color="#FF453A"
+          :icon="lock"
+        />
+        <SettingButton
+          to="/"
+          title="انتقال اطلاعات"
+          color="#FF453A"
+          :icon="backup"
+        />
       </div>
-    </div>
+    </div> -->
 
     <div class="mx-4 mb-5">
       <div class="bg-bg-input-paket rounded-[14px]">
@@ -143,7 +105,6 @@ export default {
       exit,
     }
   },
-
   computed: {
     user() {
       const user = this.$store.getters['auth/user']
@@ -159,12 +120,13 @@ export default {
     logout() {
       if (confirm('آیا مطمئن هستید؟')) {
         try {
-          this.$store.dispatch('auth/logout')
-          this.$toast.show('با موفقیت خارج شدید!', {
-            theme: 'toasted-primary',
-            position: 'top-center',
-            duration: 3000,
-          })
+          this.$store.dispatch('auth/logout').then(() =>
+            this.$toast.show('با موفقیت خارج شدید!', {
+              theme: 'toasted-primary',
+              position: 'top-center',
+              duration: 3000,
+            })
+          )
         } catch (err) {
           this.$toast.error(err, {
             theme: 'toasted-primary',
@@ -178,9 +140,7 @@ export default {
 
   async fetch() {
     try {
-      this.isLoading = true
       await this.$store.dispatch('loadUserData')
-      this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {
         theme: 'toasted-primary',
