@@ -6,10 +6,10 @@ export const parseBlu = (sms) => {
     let type = null
 
     //amount
-    const amountRegex = /([0-9.,]+) ?(?:تومان|ریال)/;
+    const amountRegex = /[0-9.,]+/;
     const amountMatch = sms.match(amountRegex);
     if (amountMatch) {
-        amount = parseFloat(amountMatch[1].replace(',', ''));
+        amount = parseFloat(amountMatch[0].replaceAll(',', ''));
     }
 
     //type
@@ -29,6 +29,7 @@ export const parseBlu = (sms) => {
 
     date = `${bluDate} ${bluTime}:00`;
 
+    console.log(amount);
     return {
         amount,
         date,
