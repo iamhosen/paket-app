@@ -13,7 +13,7 @@
 </template>
   
   <script>
-import Card from '@/components/Slider/Card.vue'
+import Card from '@/components/Carousel/Card.vue'
 
 export default {
   components: {
@@ -33,8 +33,6 @@ export default {
 .cards {
   position: relative;
   display: flex;
-  // margin: 50px;
-  // width: 300px;
 }
 </style>
   

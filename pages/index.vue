@@ -7,10 +7,10 @@
     <BaseHeader title="logo" :alert="true"></BaseHeader>
 
     <div class="w-full h-64 mb-2">
-      <SliderCardStack
+      <CarouselCardStack
         :cards="visibleCards"
         @hideCard="removeCardFromDeck"
-      ></SliderCardStack>
+      ></CarouselCardStack>
     </div>
     <HomeTabs></HomeTabs>
   </div>
