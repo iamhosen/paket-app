@@ -17,7 +17,10 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'apple-touch-startup-image', href: '/icon.png' }
+    ],
   },
 
   env: {
@@ -104,6 +107,16 @@ export default {
       short_name: 'Paket',
       description: 'مدیریت مالی شخصی',
       background_color: '#171717',
+      orientation: 'portrait',
+      shortcuts: [
+        {
+          name: 'ثبت تراکنش جدید',
+          short_name: 'تراکنش جدید',
+          description: 'ثبت تراکنش جدید',
+          url: '/transaction/new',
+          icons: [{ src: '/icon.png', sizes: '192x192' }]
+        }
+      ]
     },
   }
 }
