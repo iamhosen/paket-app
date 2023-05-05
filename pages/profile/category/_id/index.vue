@@ -57,10 +57,17 @@ export default {
   data() {
     return {
       arrow,
-      isLoading: false,
     }
   },
   computed: {
+    isLoading: {
+      get() {
+        return this.$store.state.isLoading
+      },
+      set(newValue) {
+        this.$store.commit('setLoading', newValue)
+      },
+    },
     ...mapGetters('transaction', ['getTransactionByCategoryId']),
     ...mapGetters('category', ['getCategoryById']),
     ...mapGetters('category', ['categories']),
@@ -123,9 +130,7 @@ export default {
 
   async fetch() {
     try {
-      this.isLoading = true
       await this.$store.dispatch('loadUserData')
-      this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {
         theme: 'toasted-primary',

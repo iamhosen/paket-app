@@ -64,10 +64,17 @@ export default {
   data() {
     return {
       type: 'deposit',
-      isLoading: false,
     }
   },
   computed: {
+    isLoading: {
+      get() {
+        return this.$store.state.isLoading
+      },
+      set(newValue) {
+        this.$store.commit('setLoading', newValue)
+      },
+    },
     activeTab: {
       get() {
         return this.type
@@ -90,9 +97,7 @@ export default {
   },
   async fetch() {
     try {
-      this.isLoading = true
       await this.$store.dispatch('loadUserData')
-      this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {
         theme: 'toasted-primary',

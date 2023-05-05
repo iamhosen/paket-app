@@ -85,10 +85,12 @@ export default {
     return {
       selectedMonth: 0,
       arrow,
-      isLoading: false,
     }
   },
   computed: {
+    isLoading() {
+      return this.$store.state.isLoading
+    },
     transactions() {
       return this.$store.getters['transaction/transactions']
     },
@@ -184,9 +186,7 @@ export default {
   },
   async fetch() {
     try {
-      this.isLoading = true
       await this.$store.dispatch('loadUserData')
-      this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {
         theme: 'toasted-primary',

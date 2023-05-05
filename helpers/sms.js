@@ -29,7 +29,6 @@ export const parseBlu = (sms) => {
 
     date = `${bluDate} ${bluTime}:00`;
 
-    console.log(amount);
     return {
         amount,
         date,
