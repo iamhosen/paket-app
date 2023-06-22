@@ -4,7 +4,7 @@
       <div
         class="ltr flex items-center flex-row-reverse gap-2 text-4xl font-bold"
       >
-        {{ transaction.amount }}
+        {{ numberFormat(transaction.amount) }}
         <span class="text-base font-thin opacity-50">ریال</span>
       </div>
       <div class="ltr opacity-50">{{ date }}</div>
@@ -70,13 +70,15 @@
       </nuxt-link>
     </div>
 
-    <pre class="text-[12px] opacity-40 p-4">{{ transaction.sms }}</pre>
+    <p class="text-[12px] opacity-40 p-4 whitespace-pre-line">{{ transaction.sms }}</p>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
 import { arrow, editOrange, trash } from '@/assets/icons.js'
+import { numberFormat } from '@/helpers/number.js'
+
 
 export default {
   props: {
@@ -111,6 +113,9 @@ export default {
       trash,
       isLoading: false,
     }
+  },
+  methods: {
+    numberFormat
   },
   inject: ['deleteTransaction'],
 }

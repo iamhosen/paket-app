@@ -28,7 +28,7 @@
           <label class="opacity-50" for="total">مبلغ</label>
           <div class="flex gap-2 grow">
             <input
-              v-model="inputTotal"
+              v-model="total"
               name="total"
               id="total"
               class="ltr focus:outline-none bg-transparent text-left grow"
@@ -123,7 +123,9 @@
           @selected="setTag"
         ></drop-down>
 
-        <pre class="text-[12px] opacity-40">{{ notification.content }}</pre>
+        <p class="text-[12px] opacity-40 whitespace-pre-line">
+          {{ notification.content }}
+        </p>
 
         <!-- Submit Button -->
         <div
@@ -174,6 +176,7 @@ export default {
       selectedToSource: null,
       selectedTag: null,
       source: null,
+      total: 0,
     }
   },
   computed: {
@@ -191,10 +194,6 @@ export default {
         this.type = newValue
       },
     },
-    total() {
-      if (this.notification.amount < 0) return this.notification.amount * -1
-      return +this.notification.amount
-    },
     date() {
       return this.notification.date
     },
@@ -206,27 +205,6 @@ export default {
         this.source = newValue
       },
     },
-
-    inputTotal: {
-      get() {
-        return numberFormat(this.total ?? 0)
-      },
-      set(newValue) {
-        newValue = newValue.split(',').join('')
-
-        //contains persian numbers
-        if (/[\u06F0-\u06F9]/.test(newValue)) {
-          newValue = toEnglishNumber(newValue)
-        }
-
-        //contains non numeric characters
-        if (!/^\d+$/.test(newValue)) {
-          newValue = '0'
-        }
-        this.total = newValue
-      },
-    },
-
     withdraws() {
       const withdraws = this.$store.getters['category/withdraws']
       return withdraws.map((withdraw) => {
@@ -301,7 +279,7 @@ export default {
       transaction.bank_id = this.selectedSource.id
       if (this.selectedTag) transaction.tag_id = this.selectedTag.id
 
-      if (this.type === 'deposit') transaction.amount = this.total
+      if (this.type === 'deposit') transaction.amount = +this.total
       else transaction.amount = -this.total
 
       try {
@@ -408,7 +386,12 @@ export default {
   async fetch() {
     try {
       this.isLoading = true
-      await this.$store.dispatch('loadUserData')
+      await this.$store.dispatch('loadUserData').then(() => {
+        this.total =
+          this.notification.amount > 0
+            ? +this.notification.amount
+            : -this.notification.amount
+      })
       this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {

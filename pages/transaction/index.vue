@@ -6,8 +6,8 @@
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
-    <div v-else-if="months.length == 0" class="mx-4">
-      تراکنشی تا کنون ثبت نشده است
+    <div v-else-if="months.length == 0" class="mx-4 text-center py-8 bg-primary-paket rounded-lg bg-opacity-10">
+      🥲 تراکنشی تا کنون ثبت نشده است
     </div>
     <div v-else>
       <TransactionMonthTabs
@@ -49,7 +49,7 @@
         </div>
         <div class="tab-body flex flex-col gap-4 mx-1">
           <div class="w-full flex justify-between items-center">
-            <span class="opacity-40">کل دوره</span>
+            <span class="opacity-40 ltr">کل دوره</span>
             <span
               :class="
                 getMonth(selectedMonth).total > 0
@@ -59,10 +59,10 @@
               >{{ numberFormat(getMonth(selectedMonth).total) }}</span
             >
           </div>
-          <!-- <div class="w-full flex justify-between items-center">
+          <div class="w-full flex justify-between items-center">
             <span class="opacity-40">مانده دوره های قبل</span>
-            <span class="opacity-80 text-base">۷۷,۳۴۵,۶۷۸</span>
-          </div> -->
+            <span class="opacity-80 text-base">{{ numberFormat(getLastMonthTotal) }}</span>
+          </div>
         </div>
       </div>
 
@@ -159,6 +159,8 @@ export default {
         // Add the day to the month object
         month.days.push(day)
         day.transactions.forEach((transaction) => {
+          if(transaction.category_id === 16) return
+
           if (transaction.amount > 0) month.sumOfDeposits += transaction.amount
           else month.sumOfWithdraws += transaction.amount
 
@@ -173,6 +175,17 @@ export default {
 
       return sortedMonths
     },
+
+    //write a function for sum of all transaction expect this month
+    getLastMonthTotal() {
+      let months = this.months.slice(this.selectedMonth+1)
+      let sum = 0
+      months.forEach((month) => {
+        sum += month.total
+      })
+      return sum
+    },
+    
   },
   methods: {
     updateSelectedMonth(index) {

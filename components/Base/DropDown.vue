@@ -56,10 +56,12 @@
         >
         <div class="relative">
           <input
+            v-model="search"
             type="text"
             id="input-group-search"
             class="block w-full p-2 pr-10 text-sm text-[#ffffff] border border-[#6B7280] rounded-lg bg-[#4B5563] focus:outline-none focus:border-[#9CA3AF] placeholder-[#D1D5DB]"
             :placeholder="`جستجو ${title}`"
+            @input="searchOnChange"
           />
 
           <!-- search icon -->
@@ -86,7 +88,7 @@
       <ul
         class="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700 dark:text-gray-200"
       >
-        <li v-for="item in items" :key="item.id">
+        <li v-for="item in localItems" :key="item.id">
           <span
             class="flex items-center py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
             @click="select(item.id)"
@@ -121,6 +123,8 @@ export default {
       plus,
       open: false,
       selected: null,
+      search: '',
+      localItems: [],
     }
   },
   computed: {
@@ -160,15 +164,28 @@ export default {
       this.$emit('selected', null)
     },
     select(id) {
-      this.selected = this.items.find((item) => item.id === id)
+      this.selected = this.localItems.find((item) => item.id === id)
       this.toggle()
       this.$emit('selected', this.selected)
+    },
+    searchOnChange() {
+      this.localItems = this.items
+
+      if (!this.search || this.search.length < 1) {
+        return
+      }
+
+      this.localItems = this.localItems.filter((item) =>
+        item.title.includes(this.search)
+      )
     },
   },
 
   mounted() {
+    this.localItems = this.items
+
     if (this.default) {
-      this.selected = this.items.find((item) => item.id == this.default)
+      this.selected = this.localItems.find((item) => item.id == this.default)
     }
   },
 }
