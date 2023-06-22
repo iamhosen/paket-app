@@ -38,6 +38,7 @@ export default {
   plugins: [
     '~/plugins/interact.js',
     '~/plugins/supabase.js',
+    '@/plugins/chart.js'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

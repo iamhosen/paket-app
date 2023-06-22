@@ -6,7 +6,10 @@
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
-    <div v-else-if="months.length == 0" class="mx-4 text-center py-8 bg-primary-paket rounded-lg bg-opacity-10">
+    <div
+      v-else-if="months.length == 0"
+      class="mx-4 text-center py-8 bg-primary-paket rounded-lg bg-opacity-10"
+    >
       🥲 تراکنشی تا کنون ثبت نشده است
     </div>
     <div v-else>
@@ -61,9 +64,12 @@
           </div>
           <div class="w-full flex justify-between items-center">
             <span class="opacity-40">مانده دوره های قبل</span>
-            <span class="opacity-80 text-base">{{ numberFormat(getLastMonthTotal) }}</span>
+            <span class="opacity-80 text-base">{{
+              numberFormat(getLastMonthTotal)
+            }}</span>
           </div>
         </div>
+        <BaseChart :categories="monthCategories"></BaseChart>
       </div>
 
       <TransactionList :days="getMonth(selectedMonth).days"></TransactionList>
@@ -159,7 +165,7 @@ export default {
         // Add the day to the month object
         month.days.push(day)
         day.transactions.forEach((transaction) => {
-          if(transaction.category_id === 16) return
+          if (transaction.category_id === 16) return
 
           if (transaction.amount > 0) month.sumOfDeposits += transaction.amount
           else month.sumOfWithdraws += transaction.amount
@@ -176,16 +182,60 @@ export default {
       return sortedMonths
     },
 
-    //write a function for sum of all transaction expect this month
     getLastMonthTotal() {
-      let months = this.months.slice(this.selectedMonth+1)
+      let months = this.months.slice(this.selectedMonth + 1)
       let sum = 0
       months.forEach((month) => {
         sum += month.total
       })
       return sum
     },
-    
+
+    monthCategories() {
+      let month = this.months[this.selectedMonth]
+      let monthTransactions = []
+      let monthCategories = []
+
+      month.days.forEach((m) => {
+        monthTransactions.push(...m.transactions)
+      })
+
+      monthTransactions.forEach((tr) => {
+        if (tr.category_id === 16 || tr.amount > 0) return
+
+        let amount = -tr.amount
+        let category = monthCategories.find((mc) => mc.id === tr.category_id)
+
+        if (!category) {
+          // If not, create a new day object
+          category = {
+            id: tr.category_id,
+            title: this.$store.getters['category/getCategoryById'](
+              tr.category_id
+            ).name,
+            sum: 0,
+          }
+          monthCategories.push(category)
+        }
+
+        category.sum += amount
+      })
+
+      //divide into labels and values
+      const labels = []
+      const values = []
+      monthCategories.forEach((c) => {
+        labels.push(`${c.title}: ${numberFormat(c.sum)}`)
+        values.push(c.sum)
+      })
+
+      // if(monthCategories.length >= 5) {
+      //   labels = labels.slice(0,4)
+      //   values = values.slice(0,4)
+      // }
+
+      return {labels, values}
+    },
   },
   methods: {
     updateSelectedMonth(index) {
