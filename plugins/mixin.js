@@ -1,5 +1,3 @@
-import Vue from 'vue'
-
 export default {
   data() {
     return {}
@@ -12,9 +10,6 @@ export default {
   computed: {
     user() {
       return this.$store.getters['auth/user']
-    },
-    currencyUnit() {
-      return ' ریال '
     },
   },
   methods: {

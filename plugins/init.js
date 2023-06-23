@@ -7,3 +7,8 @@ if (!Vue.__utils__) {
     mixins: [mixin],
   })
 }
+
+import jalaaliJs from 'jalaali-js'
+export default (_, inject) => {
+  inject('jalaali', jalaaliJs)
+}

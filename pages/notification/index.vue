@@ -11,7 +11,7 @@
     >
       پیامک بانکی جدید نداری! 😊
     </div>
-    <div v-else class="px-4 flex flex-col gap-4">
+    <div v-else class="flex flex-col gap-4">
       <div class="day" v-for="day in days" :key="day.title">
         <header
           class="flex justify-between px-4 py-[10px] text-[14px] border-b-[1px] border-[#3C3C43]"

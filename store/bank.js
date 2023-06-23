@@ -6,7 +6,14 @@ export const getters = {
     banks: state => state.banks,
 
     getBankById: (state) => (id) => state.banks.find(bank => bank.id == id),
-    getBankByName: (state) => (name) => state.banks.find(bank => bank.name == name)
+    getBankByName: (state) => (name) => state.banks.find(bank => bank.name == name),
+    getAccountTotal: (state) => {
+        let sum = 0
+        state.banks.forEach((bank)=> {
+            sum += bank.total_amount
+        })
+        return sum
+    }
 
 }
 

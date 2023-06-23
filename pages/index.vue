@@ -6,12 +6,18 @@
 
     <BaseHeader title="logo" :alert="true"></BaseHeader>
 
+    <div class="mx-4 mb-4 p-4 flex justify-between bg-box-paket rounded-xl">
+      <span class="opacity-40"> موجودی کل </span>
+      <span class="font-bold">{{ currency(total) }} </span>
+    </div>
+    
     <div class="w-full h-64 mb-2">
       <CarouselCardStack
         :cards="visibleCards"
         @hideCard="removeCardFromDeck"
       ></CarouselCardStack>
     </div>
+
     <HomeTabs></HomeTabs>
   </div>
 </template>
@@ -57,6 +63,9 @@ export default {
     sources() {
       return this.$store.getters['bank/banks']
     },
+    total() {
+      return this.$store.getters['bank/getAccountTotal']
+    },
   },
 
   methods: {
@@ -73,9 +82,7 @@ export default {
 
   async fetch() {
     try {
-      this.isLoading = true
       await this.$store.dispatch('loadUserData')
-      this.isLoading = false
     } catch (err) {
       this.$toast.error(err, {
         theme: 'toasted-primary',

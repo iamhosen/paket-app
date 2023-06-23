@@ -102,6 +102,26 @@ export const getters = {
         return sum
     },
 
+    getTransactionsFromDate: (_, getters) => (date) => {
+        const transactions = getters.transactions
+        const transactionsFromDate = []
+
+        transactions.forEach((tr) => {
+            let trDate = tr.date.split(' ')[0].split('/')
+
+            if (trDate[0] > date[0]) {
+                transactionsFromDate.push(tr)
+            } else if (trDate[0] == date[0] && trDate[1] > date[1]) {
+                transactionsFromDate.push(tr)
+            } else if (trDate[0] == date[0] && trDate[1] == date[1] && trDate[2] >= date[2]) {
+                transactionsFromDate.push(tr)
+            }
+
+        })
+
+        return transactionsFromDate
+    },
+
 }
 
 export const mutations = {
