@@ -3,6 +3,7 @@
     <div class="w-full flex justify-center items-center h-[40px] mb-6">
       <h1 class="text-2xl font-bold">تراکنش ها</h1>
     </div>
+
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
@@ -12,6 +13,7 @@
     >
       🥲 تراکنشی تا کنون ثبت نشده است
     </div>
+
     <div v-else>
       <TransactionMonthTabs
         :months="months"
@@ -19,69 +21,21 @@
         @monthChanged="updateSelectedMonth"
       />
 
-      <div class="flex flex-col gap-4 bg-[#282828] px-4 py-5 mb-5">
-        <div class="flex justify-between gap-2">
-          <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-bg-paket p-4 rounded-[10px] gap-[10px]"
-          >
-            <div
-              class="bg-primary-paket w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
-              v-html="arrow"
-            ></div>
-            <div>
-              <h4 class="text-xs">پرداختی</h4>
-              <span class="text-lg font-bold">{{
-                numberFormat(getMonth(selectedMonth).sumOfWithdraws * -1)
-              }}</span>
-            </div>
-          </div>
-          <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-bg-paket p-4 rounded-[10px] gap-[10px]"
-          >
-            <div
-              class="bg-[#248A3D] w-8 h-8 flex justify-center items-center rounded-lg"
-              v-html="arrow"
-            ></div>
-            <div>
-              <h4 class="text-xs">دریافتی</h4>
-              <span class="text-lg font-bold"
-                >{{ numberFormat(getMonth(selectedMonth).sumOfDeposits) }}
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="tab-body flex flex-col gap-4 mx-1">
-          <div class="w-full flex justify-between items-center">
-            <span class="opacity-40 ltr">کل دوره</span>
-            <span
-              :class="
-                getMonth(selectedMonth).total > 0
-                  ? 'bg-[#248A3D] bg-opacity-25 px-1'
-                  : 'text-primary-paket'
-              "
-              >{{ numberFormat(getMonth(selectedMonth).total) }}</span
-            >
-          </div>
-          <div class="w-full flex justify-between items-center">
-            <span class="opacity-40">مانده دوره های قبل</span>
-            <span class="opacity-80 text-base">{{
-              numberFormat(getLastMonthTotal)
-            }}</span>
-          </div>
-        </div>
-        <BaseChart :categories="monthCategories"></BaseChart>
-      </div>
+      <TransactionOverview
+        :deposits="month.sumOfDeposits"
+        :withdraws="-month.sumOfWithdraws"
+        :total="month.total"
+        :lastMonth="getTotalOfPastMonths"
+        :categories="monthCategories"
+      ></TransactionOverview>
 
-      <TransactionList :days="getMonth(selectedMonth).days"></TransactionList>
+      <TransactionList :days="month.days"></TransactionList>
     </div>
   </div>
 </template>
 
 <script>
-import { getPersianMonthName } from '@/helpers/helper.js'
-import { arrow } from '@/assets/icons.js'
 import LoadingSpinner from '@/components/Base/LoadingSpinner.vue'
-import { numberFormat } from '@/helpers/number.js'
 
 export default {
   components: {
@@ -90,162 +44,33 @@ export default {
   data() {
     return {
       selectedMonth: 0,
-      arrow,
     }
   },
   computed: {
     isLoading() {
       return this.$store.state.isLoading
     },
-    transactions() {
-      return this.$store.getters['transaction/transactions']
+    month() {
+      if (this.months.length !== 0) return this.months[this.selectedMonth]
     },
-
-    days() {
-      const days = []
-
-      // Loop over all transactions and group them by day
-      this.transactions.forEach((transaction) => {
-        const dayTitle = transaction.date.split(' ')[0]
-
-        // Check if there's already a day object for this day
-        let day = days.find((d) => d.title === dayTitle)
-        if (!day) {
-          // If not, create a new day object
-          day = {
-            title: dayTitle,
-            sum: 0,
-            transactions: [],
-          }
-          days.push(day)
-        }
-
-        // Add the transaction to the day object
-        day.sum += transaction.amount // Assuming there's an amount property on each transaction
-        day.transactions.push(transaction)
-        day.transactions.sort((a, b) => {
-          return new Date(b.date) - new Date(a.date)
-        })
-      })
-
-      days.sort((a, b) => {
-        const [aYear, aMonth, aDay] = a.title.split('/')
-        const [bYear, bMonth, bDay] = b.title.split('/')
-
-        if (aYear !== bYear) return aYear > bYear ? -1 : 1
-        else if (aMonth !== bMonth) return aMonth > bMonth ? -1 : 1
-        else if (aDay !== bDay) return aDay > bDay ? -1 : 1
-        else return 0
-      })
-
-      return days
-    },
-
     months() {
-      const months = {}
-
-      // Loop over all days and group them by month
-      this.days.forEach((day) => {
-        const t = day.title.split('/')
-        const monthTitle = `${t[0]} ${getPersianMonthName(t[1])}`
-        // Check if there's already a month object for this month
-        let month = months[monthTitle]
-        if (!month) {
-          // If not, create a new month object
-          month = {
-            title: monthTitle,
-            days: [],
-            sumOfDeposits: 0,
-            sumOfWithdraws: 0,
-            total: 0,
-          }
-          months[monthTitle] = month
-        }
-
-        // Add the day to the month object
-        month.days.push(day)
-        day.transactions.forEach((transaction) => {
-          if (transaction.category_id === 16) return
-
-          if (transaction.amount > 0) month.sumOfDeposits += transaction.amount
-          else month.sumOfWithdraws += transaction.amount
-
-          month.total += transaction.amount
-        })
-      })
-
-      // Convert the months object to an array and sort it by title
-      const sortedMonths = Object.values(months).sort((a, b) => {
-        return new Date(`${b.title}/01`) - new Date(`${a.title}/01`)
-      })
-
-      return sortedMonths
+      return this.$store.getters['transaction/getTransactionsByMonth']
     },
-
-    getLastMonthTotal() {
-      let months = this.months.slice(this.selectedMonth + 1)
-      let sum = 0
-      months.forEach((month) => {
-        sum += month.total
-      })
-      return sum
+    getTotalOfPastMonths() {
+      return this.$store.getters['transaction/getTotalOfPastMonths'](
+        this.selectedMonth + 1
+      )
     },
-
     monthCategories() {
-      let month = this.months[this.selectedMonth]
-      let monthTransactions = []
-      let monthCategories = []
-
-      month.days.forEach((m) => {
-        monthTransactions.push(...m.transactions)
-      })
-
-      monthTransactions.forEach((tr) => {
-        if (tr.category_id === 16 || tr.amount > 0) return
-
-        let amount = -tr.amount
-        let category = monthCategories.find((mc) => mc.id === tr.category_id)
-
-        if (!category) {
-          // If not, create a new day object
-          category = {
-            id: tr.category_id,
-            title: this.$store.getters['category/getCategoryById'](
-              tr.category_id
-            ).name,
-            sum: 0,
-          }
-          monthCategories.push(category)
-        }
-
-        category.sum += amount
-      })
-
-      //divide into labels and values
-      const labels = []
-      const values = []
-      monthCategories.forEach((c) => {
-        labels.push(`${c.title}: ${numberFormat(c.sum)}`)
-        values.push(c.sum)
-      })
-
-      // if(monthCategories.length >= 5) {
-      //   labels = labels.slice(0,4)
-      //   values = values.slice(0,4)
-      // }
-
-      return {labels, values}
+      return this.$store.getters['category/getCategoryOverviewByMonth'](
+        this.selectedMonth
+      )
     },
   },
   methods: {
     updateSelectedMonth(index) {
       this.selectedMonth = index
     },
-    getMonth(selected) {
-      if (this.months.length !== 0) return this.months[selected]
-    },
-    getPersianMonthName,
-    numberFormat,
   },
   async fetch() {
     try {
