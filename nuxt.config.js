@@ -36,9 +36,11 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '~/plugins/interact.js',
-    '~/plugins/supabase.js',
-    '@/plugins/chart.js'
+    '@/plugins/interact.js',
+    '@/plugins/supabase.js',
+    '@/plugins/chart.js',
+    '@/plugins/mixin.js',
+    '@/plugins/init.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
