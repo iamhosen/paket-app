@@ -101,7 +101,7 @@ export default {
 
   pwa: {
     meta: {
-      theme_color: '#171717',
+      theme_color: 'black',
       mobileAppIOS: true,
       mobileApp: true,
       appleStatusBarStyle: 'black'
@@ -110,7 +110,7 @@ export default {
       name: 'پاکِت | مدیریت مالی شخصی',
       short_name: 'Paket',
       description: 'مدیریت مالی شخصی',
-      background_color: '#171717',
+      background_color: 'black',
       orientation: 'portrait',
       shortcuts: [
         {
