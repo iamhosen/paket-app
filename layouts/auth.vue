@@ -1,9 +1,9 @@
 <template>
   <div class="h-screen flex flex-col items-center">
     <img
-      src="../assets/logo.svg"
+      src="@/assets/logo.svg"
       alt="پاکت"
-      class="logo mt-[100px] mb-[50px]"
+      class="logo mt-36 mb-16"
     />
     <div class="w-full px-6">
       <nuxt />
