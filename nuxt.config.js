@@ -41,6 +41,7 @@ export default {
     '@/plugins/apex.js',
     '@/plugins/mixin.js',
     '@/plugins/init.js',
+    '@/plugins/pwa.js',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
