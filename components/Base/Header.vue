@@ -15,7 +15,7 @@
 
     <nuxt-link v-if="alert" to="/notification">
       <button
-        class="bg-primary-paket bg-opacity-10 w-10 h-10 flex justify-center items-center rounded-[14px]"
+        class="bg-primary bg-opacity-10 w-10 h-10 flex justify-center items-center rounded-[14px]"
         v-html="alertIcon"
       ></button>
     </nuxt-link>

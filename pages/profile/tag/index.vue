@@ -6,7 +6,7 @@
     <div v-if="isLoading" class="flex justify-center items-center h-48">
       <LoadingSpinner class="h-16 w-16"></LoadingSpinner>
     </div>
-    <div v-else-if="tags.length" class="bg-bg-input-paket rounded-[14px] mx-4">
+    <div v-else-if="tags.length" class="bg-input rounded-[14px] mx-4">
       <SettingTag v-for="tag in tags" :key="tag.id" :tag="tag"></SettingTag>
     </div>
     <div v-else>برچسبی موجود نیست!</div>

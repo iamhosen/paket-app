@@ -25,7 +25,7 @@
         <!-- Submit Button -->
         <button
           type="submit"
-          class="w-full bg-primary-paket rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
+          class="w-full bg-primary rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
         >
           ثبت تغییرات
         </button>

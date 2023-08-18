@@ -6,7 +6,7 @@
     ></div>
 
     <div
-      class="flex bg-bg-input-paket mx-4 px-4 py-2 gap-4 rounded-[14px] items-center mb-5"
+      class="flex bg-back mx-4 px-4 py-2 gap-4 rounded-[14px] items-center mb-5"
     >
       <img src="@/assets/profile.png" alt="پروفایل" class="h-[100%]" />
       <div class="p-2">
@@ -17,7 +17,7 @@
 
     <div class="mx-4 mb-5">
       <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">تنظیمات</h3>
-      <div class="bg-bg-input-paket rounded-[14px]">
+      <div class="bg-back rounded-[14px]">
         <!-- <SettingButton to="/" title="دفترهای خرج" :icon="wallet" /> -->
         <SettingButton to="/profile/source" title="منابع خرج" :icon="source" />
         <SettingButton
@@ -33,7 +33,7 @@
       <h3 class="mx-4 mb-2 text-[#EBEBF5] opacity-60 text-xs">
         اطلاعات کاربری
       </h3>
-      <div class="bg-bg-input-paket rounded-[14px]">
+      <div class="bg-back rounded-[14px]">
         <SettingButton
           to="/"
           title="ویرایش اطلاعات کاربری"
@@ -56,7 +56,7 @@
     </div> -->
 
     <div class="mx-4 mb-5">
-      <div class="bg-bg-input-paket rounded-[14px]">
+      <div class="bg-back rounded-[14px]">
         <button
           @click="logout"
           to="/auth/login"
@@ -74,7 +74,7 @@
     <p
       class="mx-4 pb-8 text-left text-xs tracking-widest font-medium text-white opacity-30"
     >
-      Packet by Hossein Amirhosseini
+      Paket by Hossein Amirhosseini
     </p>
   </div>
 </template>

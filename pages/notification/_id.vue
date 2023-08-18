@@ -43,7 +43,7 @@
         <!-- Date  -->
         <date-picker
           v-model="date"
-          color="#EB5340"
+          color="#"
           type="datetime"
           class="bg-[#1F1F1F] flex justify-between p-4 rounded-xl mb-8"
         >
@@ -129,10 +129,10 @@
 
         <!-- Submit Button -->
         <div
-          class="fixed z-50 px-4 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0 pt-2 pb-4 left-1/2 bg-bg-paket"
+          class="fixed z-50 px-4 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0 pt-2 pb-4 left-1/2 bg-back"
         >
           <button
-            class="w-full bg-primary-paket rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
+            class="w-full bg-primary rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
           >
             ثبت تراکنش
           </button>

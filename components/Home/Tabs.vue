@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-wrapper mx-4 bg-box-paket p-4 rounded-2xl mb-8">
+  <div class="tab-wrapper mx-4 bg-back p-4 rounded-2xl mb-8">
     <div class="tab-head mb-5">
       <ul
         class="flex flex-row rounded-lg justify-between bg-[#767680] p-1 bg-opacity-25 gap-1 cursor-pointer"
@@ -35,7 +35,7 @@
       </div>
       <div class="w-full flex justify-between items-center">
         <span class="opacity-40">پرداختی</span>
-        <span class="text-primary-paket text-base">{{
+        <span class="text-primary text-base">{{
           isWeek ? currency(weekWithdraw) : currency(monthWithdraw)
         }}</span>
       </div>
@@ -135,10 +135,10 @@ export default {
       return this.weekDeposit - this.weekWithdraw
     },
     isWeek() {
-      return this.activeTab === 'week' ? 'bg-primary-paket rounded-lg' : ''
+      return this.activeTab === 'week' ? 'bg-primary rounded-lg' : ''
     },
     isMonth() {
-      return this.activeTab === 'month' ? 'bg-primary-paket rounded-lg' : ''
+      return this.activeTab === 'month' ? 'bg-primary rounded-lg' : ''
     },
     totalStyle() {
       if (
@@ -146,7 +146,7 @@ export default {
         (this.isMonth && this.monthTotal > 0)
       )
         return 'bg-[#248A3D] bg-opacity-25 px-1'
-      else return 'text-primary-paket'
+      else return 'text-primary'
     },
   },
   methods: {

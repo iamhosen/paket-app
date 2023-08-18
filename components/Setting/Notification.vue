@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 bg-box-paket rounded-[13px] flex justify-between">
+  <div class="p-4 bg-box rounded-[13px] flex justify-between">
     <nuxt-link :to="`/notification/${notification.id}`" class="grow flex gap-3">
       <div
         class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg self-center"
@@ -13,7 +13,7 @@
             :class="
               notification.amount > 0
                 ? 'bg-[#248A3D] bg-opacity-25 px-1'
-                : 'text-primary-paket'
+                : 'text-primary'
             "
             >{{ numberFormat(notification.amount ?? 0) }}</span
           >
@@ -24,7 +24,7 @@
 
     <div class="flex justify-center gap-2 mr-8 items-stretch">
       <button
-        class="bg-primary-paket bg-opacity-10 w-10 h-10 flex justify-center items-center rounded-[14px]"
+        class="bg-primary bg-opacity-10 w-10 h-10 flex justify-center items-center rounded-[14px]"
         v-html="trash"
         @click="deleteNotification"
       ></button>

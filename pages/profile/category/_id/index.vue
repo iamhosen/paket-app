@@ -12,14 +12,14 @@
       <div class="flex flex-col gap-4 bg-[#282828] px-4 py-5 mb-5">
         <div class="flex justify-between gap-2">
           <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-bg-paket p-4 rounded-[10px] gap-[10px]"
+            class="w-100 flex flex-wrap grow justify-start items-center bg-back p-4 rounded-[10px] gap-[10px]"
           >
             <div
               class="w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
               :class="
                 category.type === 'deposit'
                   ? 'bg-[#248A3D] rotate-0'
-                  : 'bg-primary-paket rotate-180'
+                  : 'bg-primary rotate-180'
               "
               v-html="arrow"
             ></div>

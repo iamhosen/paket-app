@@ -11,7 +11,7 @@
         ? 'bg-[#00006C]'
         : card.name == 'پاسارگاد'
         ? 'bg-[#F3B23E]'
-        : 'bg-primary-paket'
+        : 'bg-primary'
     "
   >
     <h3 class="text-xl">{{ card.name }}</h3>

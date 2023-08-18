@@ -20,7 +20,7 @@
       <!-- items -->
       <div
         v-if="type === 'deposit'"
-        class="bg-bg-input-paket rounded-[14px] mx-4"
+        class="bg-input rounded-[14px] mx-4"
       >
         <div v-if="deposites.length">
           <Category
@@ -33,7 +33,7 @@
       </div>
       <div
         v-if="type === 'withdraw'"
-        class="bg-bg-input-paket rounded-[14px] mx-4"
+        class="bg-input rounded-[14px] mx-4"
       >
         <div v-if="withdraws.length">
           <Category

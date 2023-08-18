@@ -34,10 +34,10 @@
         </div>
         <div class="flex justify-between gap-2">
           <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-bg-paket p-4 rounded-[10px] gap-[10px]"
+            class="w-100 flex flex-wrap grow justify-start items-center bg-back p-4 rounded-[10px] gap-[10px]"
           >
             <div
-              class="bg-primary-paket w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
+              class="bg-primary w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
               v-html="arrow"
             ></div>
             <div>
@@ -48,7 +48,7 @@
             </div>
           </div>
           <div
-            class="w-100 flex flex-wrap grow justify-start items-center bg-bg-paket p-4 rounded-[10px] gap-[10px]"
+            class="w-100 flex flex-wrap grow justify-start items-center bg-back p-4 rounded-[10px] gap-[10px]"
           >
             <div
               class="bg-[#248A3D] w-8 h-8 flex justify-center items-center rounded-lg"

@@ -6,17 +6,17 @@
 
     <BaseHeader title="logo" :alert="true"></BaseHeader>
 
-    <div class="mx-4 mb-4 p-4 flex justify-between bg-box-paket rounded-xl">
+    <div class="mx-4 mb-4 p-4 flex justify-between bg-back rounded-xl">
       <span class="opacity-40"> موجودی کل </span>
       <span class="font-bold">{{ currency(total) }} </span>
     </div>
     
-    <div class="w-full h-64 mb-2">
+    <!-- <div class="w-full h-64 mb-2">
       <CarouselCardStack
         :cards="visibleCards"
         @hideCard="removeCardFromDeck"
       ></CarouselCardStack>
-    </div>
+    </div> -->
 
     <HomeTabs></HomeTabs>
   </div>

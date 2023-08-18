@@ -14,10 +14,15 @@ module.exports = {
     },
     extend: {
       colors: {
-        'primary-paket': '#EB5340',
-        'box-paket': '#1F1F1F',
-        'bg-paket': '#171717',
-        'bg-input-paket': '#1C1C1E',
+        primary: {
+          light: '#EBE5FC',
+          DEFAULT: '#7749F8',
+          dark: '#5227CC',
+        },
+        box: "#1C1C1E",
+        back: "#171717",
+        input: '#1C1C1E',
+        black: '#000000',
       },
     },
     fontFamily: {

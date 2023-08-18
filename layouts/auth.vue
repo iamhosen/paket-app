@@ -9,7 +9,7 @@
       <nuxt />
     </div>
     <p class="text-xs tracking-widest font-medium mt-16 text-white opacity-30">
-      Packet by Hossein Amirhosseini
+      Paket by Hossein Amirhosseini
     </p>
   </div>
 </template>

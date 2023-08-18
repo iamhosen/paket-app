@@ -9,7 +9,7 @@
     </div>
     <div
       v-else-if="months.length == 0"
-      class="mx-4 text-center py-8 bg-primary-paket rounded-lg bg-opacity-10"
+      class="mx-4 text-center py-8 bg-primary rounded-lg bg-opacity-10"
     >
       🥲 تراکنشی تا کنون ثبت نشده است
     </div>

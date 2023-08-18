@@ -25,13 +25,13 @@
         <button
           v-if="!isLoading"
           type="submit"
-          class="w-full bg-primary-paket rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
+          class="w-full bg-primary rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
         >
           ثبت تغییرات
         </button>
         <button
           v-else
-          class="w-full py-3.5 border-0 border-primary-paket text-primary-paket bg-primary-paket bg-opacity-10 rounded-xl flex justify-center items-center"
+          class="w-full py-3.5 border-0 border-primary text-primary bg-primary bg-opacity-10 rounded-xl flex justify-center items-center"
         >
           <loading-spinner />
         </button>

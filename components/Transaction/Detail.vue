@@ -13,7 +13,7 @@
       <div class="flex justify-between gap-4 mb-5">
         <nuxt-link
           :to="`/profile/source/${bank.id}`"
-          class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
+          class="w-100 flex flex-wrap grow justify-start items-center bg-box p-4 rounded-[10px] gap-[10px]"
         >
           <div
             class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
@@ -26,7 +26,7 @@
         </nuxt-link>
         <nuxt-link
           :to="`/profile/category/${category.id}`"
-          class="w-100 flex flex-wrap grow justify-start items-center bg-box-paket p-4 rounded-[10px] gap-[10px]"
+          class="w-100 flex flex-wrap grow justify-start items-center bg-box p-4 rounded-[10px] gap-[10px]"
         >
           <div
             class="bg-[#5E5CE6] w-8 h-8 flex justify-center items-center rounded-lg"
@@ -41,7 +41,7 @@
 
       <div
         v-if="transaction.description || tag"
-        class="w-100 flex flex-col flex-wrap items-start bg-box-paket p-4 rounded-[10px] gap-[10px]"
+        class="w-100 flex flex-col flex-wrap items-start bg-box p-4 rounded-[10px] gap-[10px]"
       >
         <p class="opacity-50 mb-4">
           {{ transaction.description }}
@@ -57,15 +57,15 @@
     </div>
     <div class="px-4 flex justify-center gap-3 items-stretch">
       <button
-        class="bg-primary-paket bg-opacity-10 px-5 rounded-[14px]"
+        class="bg-primary bg-opacity-10 px-5 rounded-[14px]"
         v-html="trash"
         @click="deleteTransaction(transaction)"
       ></button>
       <nuxt-link
         :to="`/transaction/${transaction.id}/edit`"
-        class="border-[1px] border-primary-paket rounded-[14px] grow py-4 font-bold text-primary-paket flex justify-center items-center gap-2"
+        class="border-[1px] border-primary rounded-[14px] grow py-4 font-bold text-primary flex justify-center items-center gap-2"
       >
-        <span v-html="editOrange" class="fill-primary-paket"></span>
+        <span v-html="editOrange" class="fill-primary"></span>
         ویرایش
       </nuxt-link>
     </div>

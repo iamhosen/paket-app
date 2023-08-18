@@ -1,6 +1,6 @@
 <template>
   <div
-    class="transaction p-4 bg-box-paket rounded-[13px] flex gap-3 items-start"
+    class="transaction p-4 bg-box rounded-[13px] flex gap-3 items-start"
     @click="open"
   >
     <div
@@ -21,7 +21,7 @@
         :class="
           transaction.amount > 0
             ? 'bg-[#248A3D] bg-opacity-25 px-1'
-            : 'text-primary-paket'
+            : 'text-primary'
         "
         >{{ numberFormat(transaction.amount) }}</span
       >

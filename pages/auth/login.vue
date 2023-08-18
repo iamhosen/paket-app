@@ -2,7 +2,7 @@
   <div>
     <form @submit.prevent="login" class="mb-8">
       <div
-        class="paket-form bg-[#1c1c1e] w-full border-2 border-opacity-20 border-[#EB5340] rounded-xl px-4 mb-5"
+        class="paket-form bg-[#1c1c1e] w-full border-2 border-opacity-20 border-primary rounded-xl px-4 mb-5"
       >
         <input
           v-model="email"
@@ -25,13 +25,13 @@
       <button
         type="submit"
         v-if="!isLoading"
-        class="w-full py-3.5 bg-primary-paket rounded-xl text-center"
+        class="w-full py-3.5 bg-primary rounded-xl text-center"
       >
         ورود به حساب
       </button>
       <button
         v-else
-        class="w-full py-3.5 border-0 border-primary-paket text-primary-paket bg-primary-paket bg-opacity-10 rounded-xl flex justify-center items-center"
+        class="w-full py-3.5 border-0 border-primary text-primary bg-primary bg-opacity-10 rounded-xl flex justify-center items-center"
       >
         <loading-spinner />
       </button>
@@ -45,7 +45,7 @@
 
     <nuxt-link
       to="/auth/register"
-      class="block w-full py-3.5 border-2 border-primary-paket text-primary-paket bg-primary-paket bg-opacity-10 rounded-xl text-center"
+      class="block w-full py-3.5 border-2 border-primary text-primary bg-primary bg-opacity-10 rounded-xl text-center"
     >
       ساخت حساب جدید
     </nuxt-link>
