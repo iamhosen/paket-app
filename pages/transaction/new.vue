@@ -120,7 +120,7 @@
 
         <!-- Submit Button -->
         <div
-          class="fixed z-50 px-4 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0 pt-2 pb-4 left-1/2 bg-back"
+          class="fixed z-50 px-4 pt-2 pb-6 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0  left-1/2 bg-back"
         >
           <button
             class="w-full bg-primary rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"

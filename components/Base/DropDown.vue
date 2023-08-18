@@ -106,7 +106,7 @@
       <nuxt-link
         v-if="type"
         :to="`/profile/${type}/new`"
-        class="flex items-center gap-3 p-3 text-sm font-medium text-primary border-t rounded-b-lg bg-[#312121] border-[#828282] hover:bg-gray-100 dark:bg-gray-700 hover:bg-[#502A27] hover:underline"
+        class="flex items-center gap-3 p-3 text-sm font-medium text-primary border-t rounded-b-lg bg-primary bg-opacity-10 border-[#828282] hover:bg-gray-100 dark:bg-gray-700 hover:bg-opacity-20 hover:underline"
       >
         <span v-html="plus"></span>
         افزودن {{ title }} جدید
