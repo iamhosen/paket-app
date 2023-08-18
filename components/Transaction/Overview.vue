@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col gap-4 bg-[#282828] px-4 py-5 mb-5">
+  <div class="flex flex-col gap-4 bg-back px-4 py-5 mb-5">
     <div class="flex justify-between gap-2">
       <div
-        class="w-100 flex flex-wrap grow basis-0.5 justify-start items-center bg-back p-4 rounded-[10px] gap-[10px]"
+        class="w-100 flex flex-wrap grow basis-0.5 justify-start items-center bg-black p-4 rounded-[10px] gap-[10px]"
       >
         <div
           class="bg-primary w-8 h-8 flex justify-center items-center rounded-lg rotate-180"
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div
-        class="w-100 flex flex-wrap grow basis-0.5 justify-start items-center bg-back p-4 rounded-[10px] gap-[10px]"
+        class="w-100 flex flex-wrap grow basis-0.5 justify-start items-center bg-black p-4 rounded-[10px] gap-[10px]"
       >
         <div
           class="bg-[#248A3D] w-8 h-8 flex justify-center items-center rounded-lg"
@@ -48,6 +48,8 @@
         </span>
       </div>
     </div>
+
+    <!-- <apexchart :options="options" :series="categories.values"></apexchart> -->
 
     <BaseChart v-if="categories" :categories="categories"></BaseChart>
   </div>
@@ -83,6 +85,9 @@ export default {
       type: Object,
       required: false,
     },
+  },
+  computed: {
+    
   },
 }
 </script>

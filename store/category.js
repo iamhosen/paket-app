@@ -41,7 +41,8 @@ export const getters = {
         const labels = []
         const values = []
         monthCategories.forEach((c) => {
-            labels.push(`${c.title}: ${Number(c.sum).toLocaleString('en-US')}`)
+            // labels.push(`${c.title}: ${Number(c.sum).toLocaleString('en-US')}`)
+            labels.push(c.title)
             values.push(c.sum)
         })
 
