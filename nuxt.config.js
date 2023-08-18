@@ -38,6 +38,7 @@ export default {
   plugins: [
     '@/plugins/interact.js',
     '@/plugins/supabase.js',
+    '@/plugins/apex.js',
     '@/plugins/chart.js',
     '@/plugins/mixin.js',
     '@/plugins/init.js',

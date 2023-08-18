@@ -6,31 +6,31 @@
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
         <nuxt-link
           to="/profile"
-          class="nav-item inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+          class="nav-item inline-flex flex-col items-center justify-center px-5 group"
         >
           <i v-html="iconProfile"></i>
         </nuxt-link>
         <nuxt-link
           to="/analysis"
-          class="nav-item inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+          class="nav-item inline-flex flex-col items-center justify-center px-5 group"
         >
           <i v-html="iconDocs"></i>
         </nuxt-link>
         <nuxt-link
           to="/transaction/new"
-          class="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+          class="inline-flex flex-col items-center justify-center px-5 group"
         >
           <i v-html="iconPlus"></i>
         </nuxt-link>
         <nuxt-link
           to="/transaction"
-          class="nav-item-t inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+          class="nav-item-t inline-flex flex-col items-center justify-center px-5 group"
         >
           <i v-html="iconTrans"></i>
         </nuxt-link>
         <nuxt-link
           to="/"
-          class="nav-item inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 group"
+          class="nav-item inline-flex flex-col items-center justify-center px-5 group"
         >
           <i v-html="iconHome"></i>
         </nuxt-link>
@@ -63,7 +63,7 @@ export default {
 <style lang="scss">
 .nav-item.nuxt-link-exact-active {
   svg path {
-    @apply fill-primary
+    @apply fill-primary;
   }
 
   &::after {
@@ -73,7 +73,7 @@ export default {
     border-radius: 50%;
     height: 5px;
     width: 5px;
-    @apply bg-primary
+    @apply bg-primary;
   }
 }
 .nav-item-t.nuxt-link-exact-active {
