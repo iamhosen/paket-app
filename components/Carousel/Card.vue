@@ -6,15 +6,15 @@
       isAnimating: isInteractAnimating,
       isCurrent: isCurrent,
     }"
-    class="card"
-    :style="{ transform: transformString, background: 'rgb(235, 83, 64)' }"
+    class="card bg-primary"
+    :style="{ transform: transformString }"
     @click="onClick"
   >
     <div class="w-full h-full p-8 flex flex-col gap-y-4">
       <h3 class="text-xl">{{ card.name }}</h3>
-      <span class="font-xero ltr text-[1.4em] text-center tracking-wider">{{
-        card.card_number
-      }}</span>
+      <span class="font-xero ltr text-[1.4em] text-center tracking-wider">
+        {{ styledCardNumber }}
+      </span>
       <span class="flex flex-col">
         <p class="font-normal opacity-40">موجودی</p>
         <p class="font-bold text-2xl tracking-widest">
@@ -24,7 +24,7 @@
     </div>
   </div>
 </template>
-  
+
 <script>
 import { toPersianNumberFormat } from '@/helpers/number.js'
 const ACCEPT_CARD = 'cardAccepted'
@@ -72,6 +72,9 @@ export default {
       }
 
       return null
+    },
+    styledCardNumber() {
+      return this.card?.card_number?.replace(/(.{4})/g, '$1 ')
     },
   },
 
@@ -215,7 +218,7 @@ export default {
   },
 }
 </script>
-  
+
 <style lang="scss" scoped>
 $ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 $c-white: #fff;
@@ -371,4 +374,3 @@ $fs-card-title: 1.125em;
   }
 }
 </style>
-  
