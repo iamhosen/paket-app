@@ -1,202 +1,214 @@
 import { getPersianMonthName } from '../helpers/helper.js'
 
 export const state = () => ({
-    transactions: []
+  transactions: [],
 })
 
 export const getters = {
-    transactions: state => state.transactions,
+  transactions: (state) => state.transactions,
 
-    getTransactionById: (state) => (id) => state.transactions.find(transaction => transaction.id == id),
-    getTransactionByBankId: (state) => (id) => state.transactions.filter(transaction => transaction.bank_id == id),
-    getTransactionByCategoryId: (state) => (id) => state.transactions.filter(transaction => transaction.category_id == id),
-    getTransactionByTagId: (state) => (id) => state.transactions.filter(transaction => transaction.tag_id == id),
+  getTransactionById: (state) => (id) =>
+    state.transactions.find((transaction) => transaction.id == id),
+  getTransactionByBankId: (state) => (id) =>
+    state.transactions.filter((transaction) => transaction.bank_id == id),
+  getTransactionByCategoryId: (state) => (id) =>
+    state.transactions.filter((transaction) => transaction.category_id == id),
+  getTransactionByTagId: (state) => (id) =>
+    state.transactions.filter((transaction) => transaction.tag_id == id),
 
-    getTransactionsByDay: (state) => {
-        const days = []
+  getTransactionsByDay: (state) => {
+    const days = []
 
-        // Loop over all transactions and group them by day
-        state.transactions.forEach((transaction) => {
-            const dayTitle = transaction.date.split(' ')[0]
+    // Loop over all transactions and group them by day
+    state.transactions.forEach((transaction) => {
+      const dayTitle = transaction.date.split(' ')[0]
 
-            // Check if there's already a day object for this day
-            let day = days.find((d) => d.title === dayTitle)
-            if (!day) {
-                // If not, create a new day object
-                day = {
-                    title: dayTitle,
-                    sum: 0,
-                    transactions: [],
-                }
-                days.push(day)
-            }
+      // Check if there's already a day object for this day
+      let day = days.find((d) => d.title === dayTitle)
+      if (!day) {
+        // If not, create a new day object
+        day = {
+          title: dayTitle,
+          sum: 0,
+          sumOfDeposits: 0,
+          sumOfWithdraws: 0,
+          transactions: [],
+        }
+        days.push(day)
+      }
 
-            // Add the transaction to the day object
-            day.sum += transaction.amount // Assuming there's an amount property on each transaction
-            day.transactions.push(transaction)
-            day.transactions.sort((a, b) => {
-                return new Date(b.date) - new Date(a.date)
-            })
-        })
+      if (transaction.amount > 0) day.sumOfDeposits += transaction.amount
+      else day.sumOfWithdraws += transaction.amount
 
-        days.sort((a, b) => {
-            const [aYear, aMonth, aDay] = a.title.split('/')
-            const [bYear, bMonth, bDay] = b.title.split('/')
+      // Add the transaction to the day object
+      day.sum += transaction.amount // Assuming there's an amount property on each transaction
+      day.transactions.push(transaction)
+      day.transactions.sort((a, b) => {
+        return new Date(b.date) - new Date(a.date)
+      })
+    })
 
-            if (aYear !== bYear) return aYear > bYear ? -1 : 1
-            else if (aMonth !== bMonth) return aMonth > bMonth ? -1 : 1
-            else if (aDay !== bDay) return aDay > bDay ? -1 : 1
-            else return 0
-        })
+    days.sort((a, b) => {
+      const [aYear, aMonth, aDay] = a.title.split('/')
+      const [bYear, bMonth, bDay] = b.title.split('/')
 
-        return days
-    },
+      if (aYear !== bYear) return aYear > bYear ? -1 : 1
+      else if (aMonth !== bMonth) return aMonth > bMonth ? -1 : 1
+      else if (aDay !== bDay) return aDay > bDay ? -1 : 1
+      else return 0
+    })
 
-    getTransactionsByMonth: (_, getters) => {
-        const months = {}
+    return days
+  },
 
-        // Loop over all days and group them by month
-        getters.getTransactionsByDay.forEach((day) => {
-            const t = day.title.split('/')
-            const monthTitle = `${t[0]} ${getPersianMonthName(t[1])}`
-            // Check if there's already a month object for this month
-            let month = months[monthTitle]
-            if (!month) {
-                // If not, create a new month object
-                month = {
-                    title: monthTitle,
-                    days: [],
-                    sumOfDeposits: 0,
-                    sumOfWithdraws: 0,
-                    total: 0,
-                }
-                months[monthTitle] = month
-            }
+  getTransactionsByMonth: (_, getters) => {
+    const months = {}
 
-            // Add the day to the month object
-            month.days.push(day)
-            day.transactions.forEach((transaction) => {
-                if (transaction.category_id === 16) return
+    // Loop over all days and group them by month
+    getters.getTransactionsByDay.forEach((day) => {
+      const t = day.title.split('/')
+      const monthTitle = `${t[0]} ${getPersianMonthName(t[1])}`
+      // Check if there's already a month object for this month
+      let month = months[monthTitle]
+      if (!month) {
+        // If not, create a new month object
+        month = {
+          title: monthTitle,
+          days: [],
+          sumOfDeposits: 0,
+          sumOfWithdraws: 0,
+          total: 0,
+        }
+        months[monthTitle] = month
+      }
 
-                if (transaction.amount > 0) month.sumOfDeposits += transaction.amount
-                else month.sumOfWithdraws += transaction.amount
+      // Add the day to the month object
+      month.days.push(day)
+      day.transactions.forEach((transaction) => {
+        if (transaction.category_id === 16) return
 
-                month.total += transaction.amount
-            })
-        })
+        if (transaction.amount > 0) month.sumOfDeposits += transaction.amount
+        else month.sumOfWithdraws += transaction.amount
 
-        // Convert the months object to an array and sort it by title
-        const sortedMonths = Object.values(months).sort((a, b) => {
-            return new Date(`${b.title}/01`) - new Date(`${a.title}/01`)
-        })
+        month.total += transaction.amount
+      })
+    })
 
-        return sortedMonths
-    },
+    // Convert the months object to an array and sort it by title
+    const sortedMonths = Object.values(months).sort((a, b) => {
+      return new Date(`${b.title}/01`) - new Date(`${a.title}/01`)
+    })
 
-    getTotalOfPastMonths: (_, getters) => (id) => {
-        let months = getters.getTransactionsByMonth.slice(id)
-        let sum = 0
-        months.forEach((month) => {
-            sum += month.total
-        })
-        return sum
-    },
+    return sortedMonths
+  },
 
-    getTransactionsFromDate: (_, getters) => (date) => {
-        const transactions = getters.transactions
-        const transactionsFromDate = []
+  getTotalOfPastMonths: (_, getters) => (id) => {
+    let months = getters.getTransactionsByMonth.slice(id)
+    let sum = 0
+    months.forEach((month) => {
+      sum += month.total
+    })
+    return sum
+  },
 
-        transactions.forEach((tr) => {
-            let trDate = tr.date.split(' ')[0].split('/')
+  getTransactionsFromDate: (_, getters) => (date) => {
+    const transactions = getters.transactions
+    const transactionsFromDate = []
 
-            if (trDate[0] > date[0]) {
-                transactionsFromDate.push(tr)
-            } else if (trDate[0] == date[0] && trDate[1] > date[1]) {
-                transactionsFromDate.push(tr)
-            } else if (trDate[0] == date[0] && trDate[1] == date[1] && trDate[2] >= date[2]) {
-                transactionsFromDate.push(tr)
-            }
+    transactions.forEach((tr) => {
+      let trDate = tr.date.split(' ')[0].split('/')
 
-        })
+      if (trDate[0] > date[0]) {
+        transactionsFromDate.push(tr)
+      } else if (trDate[0] == date[0] && trDate[1] > date[1]) {
+        transactionsFromDate.push(tr)
+      } else if (
+        trDate[0] == date[0] &&
+        trDate[1] == date[1] &&
+        trDate[2] >= date[2]
+      ) {
+        transactionsFromDate.push(tr)
+      }
+    })
 
-        return transactionsFromDate
-    },
-
+    return transactionsFromDate
+  },
 }
 
 export const mutations = {
-    setTransactions(state, transactions) {
-        state.transactions = transactions
-    },
+  setTransactions(state, transactions) {
+    state.transactions = transactions
+  },
 }
 
 export const actions = {
-    async fetchTransactions({ commit }) {
-        const { data, error } = await this.$supabase
-            .from('Transactions')
-            .select('*')
+  async fetchTransactions({ commit }) {
+    const { data, error } = await this.$supabase
+      .from('Transactions')
+      .select('*')
 
-        if (error) {
-            throw new Error(error.message)
-        }
-
-        commit('setTransactions', data)
-    },
-    async create({ dispatch, rootGetters }, transaction) {
-        const { data, error } = await this.$supabase
-            .from('Transactions')
-            .insert(transaction)
-
-        if (error) {
-            throw new Error(error.message)
-        }
-
-        await dispatch('fetchTransactions')
-        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
-    },
-    async edit({ dispatch }, transaction) {
-        const { data, error } = await this.$supabase
-            .from('Transactions')
-            .update(transaction)
-            .match({ id: transaction.id })
-
-        if (error) {
-            throw new Error(error.message)
-        }
-
-        await dispatch('fetchTransactions')
-        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
-
-    },
-    async delete({ dispatch }, transaction) {
-        const { data, error } = await this.$supabase
-            .from('Transactions')
-            .delete()
-            .match({ id: transaction.id })
-
-        if (error) {
-            throw new Error(error.message)
-        }
-
-        await dispatch('fetchTransactions')
-        await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
-
-    },
-    async createTransition({ dispatch, rootGetters }, { inTransaction, outTransaction, wageTotal = null }) {
-        await dispatch('create', outTransaction)
-        await dispatch('create', inTransaction)
-
-        //wage
-        if (wageTotal) {
-            await dispatch('create', {
-                user_id: rootGetters['auth/user'].id,
-                date: outTransaction.date,
-                sms: null,
-                category_id: 15,
-                description: inTransaction.description,
-                bank_id: outTransaction.bank_id,
-                amount: -wageTotal
-            })
-        }
+    if (error) {
+      throw new Error(error.message)
     }
+
+    commit('setTransactions', data)
+  },
+  async create({ dispatch, rootGetters }, transaction) {
+    const { data, error } = await this.$supabase
+      .from('Transactions')
+      .insert(transaction)
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    await dispatch('fetchTransactions')
+    await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
+  },
+  async edit({ dispatch }, transaction) {
+    const { data, error } = await this.$supabase
+      .from('Transactions')
+      .update(transaction)
+      .match({ id: transaction.id })
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    await dispatch('fetchTransactions')
+    await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
+  },
+  async delete({ dispatch }, transaction) {
+    const { data, error } = await this.$supabase
+      .from('Transactions')
+      .delete()
+      .match({ id: transaction.id })
+
+    if (error) {
+      throw new Error(error.message)
+    }
+
+    await dispatch('fetchTransactions')
+    await dispatch('bank/updateBankTotal', transaction.bank_id, { root: true })
+  },
+  async createTransition(
+    { dispatch, rootGetters },
+    { inTransaction, outTransaction, wageTotal = null }
+  ) {
+    await dispatch('create', outTransaction)
+    await dispatch('create', inTransaction)
+
+    //wage
+    if (wageTotal) {
+      await dispatch('create', {
+        user_id: rootGetters['auth/user'].id,
+        date: outTransaction.date,
+        sms: null,
+        category_id: 15,
+        description: inTransaction.description,
+        bank_id: outTransaction.bank_id,
+        amount: -wageTotal,
+      })
+    }
+  },
 }

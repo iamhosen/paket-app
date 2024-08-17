@@ -9,12 +9,12 @@
       <picker
         :tabs="[
           { id: 'deposit', title: 'دریافتی', color: '#248A3D' },
-          { id: 'withdraw', title: 'پرداختی' },
+          { id: 'withdraw', title: 'پرداختی', color: '#dc2626' },
           { id: 'transition', title: 'جیب به جیب', color: '#007AFF' },
         ]"
         value="withdraw"
         @changeTab="changeTab"
-      ></picker>
+      />
 
       <form @submit.prevent="createTransaction" class="px-4">
         <!-- Total -->
@@ -120,7 +120,7 @@
 
         <!-- Submit Button -->
         <div
-          class="fixed z-50 px-4 pt-2 pb-6 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0  left-1/2 bg-back"
+          class="fixed z-50 px-4 pt-2 pb-6 w-full -translate-x-1/2 border-t-[0.5px] border-[#828282] bottom-0 left-1/2 bg-back"
         >
           <button
             class="w-full bg-primary rounded-[14px] py-4 font-bold flex justify-center items-center gap-2"
@@ -392,4 +392,5 @@ export default {
     text-align: left;
   }
 }
-</style>>
+</style>
+>

@@ -8,6 +8,9 @@ module.exports = {
     './nuxt.config.{js,ts}',
   ],
   theme: {
+    color: {
+      transparent: 'transparent',
+    },
     extend: {
       colors: {
         primary: {
@@ -19,7 +22,6 @@ module.exports = {
         back: '#171717',
         input: '#1C1C1E',
         black: '#000000',
-        transparent: 'transparent',
       },
     },
     fontFamily: {

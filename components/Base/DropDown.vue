@@ -45,7 +45,7 @@
 
     <div
       id="dropdownSearch"
-      class="z-10 bg-white rounded-lg shadow w-full bg-box mb-4"
+      class="z-10 rounded-lg shadow w-full bg-box mb-4"
       :class="{
         hidden: !isOpen,
       }"

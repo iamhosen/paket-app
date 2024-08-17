@@ -11,26 +11,23 @@ export default {
       type: Object,
       required: true,
     },
+    title: {
+      type: String,
+      default: 'خرج',
+    },
   },
   computed: {
     options() {
       return {
         colors: [
-          // '#C3DDFD',
-          // '#76A9FA',
-          // '#3F83F8',
-          // '#1A56DB',
-          // '#233876',
-          '#DCD7FE',
-          '#AC94FA',
-          '#9061F9',
-          '#6C2BD9',
-          '#4A1D96',
-          // '#CDDBFE',
-          // '#8DA2FB',
-          // '#6875F5',
-          // '#5145CD',
-          // '#362F78',
+          '#003f5c',
+          '#2f4b7c',
+          '#665191',
+          '#a05195',
+          '#d45087',
+          '#f95d6a',
+          '#ff7c43',
+          '#ffa600',
         ],
 
         chart: {
@@ -55,7 +52,7 @@ export default {
                 total: {
                   showAlways: true,
                   show: true,
-                  label: 'مجموع خرج',
+                  label: 'مجموع ' + this.title,
                   fontFamily: 'Shabnam',
                   formatter: function (w) {
                     const sum = w.globals.seriesTotals.reduce((a, b) => {
@@ -73,7 +70,7 @@ export default {
                   },
                 },
               },
-              size: '70%',
+              size: '80%',
             },
           },
         },
